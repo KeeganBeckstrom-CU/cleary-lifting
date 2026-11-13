@@ -1804,7 +1804,7 @@ async function authDo(a){const g=id=>(($("#au-"+id)||$("#su-"+id)||{}).value||""
   }catch(e){fail((e&&e.msg)||"Something went wrong. Try again.")}}
 async function authSignup(me,em,pw){authBusy=true;render();const fail=m=>{authBusy=false;suErr=authFriendly(m);render()};
   try{if(await rpc("lift_email_for",{uname:me.u},true))return fail("That username is taken. Try another one.");
-    const j=await supaFetch("/auth/v1/signup",{method:"POST",body:{email:em,password:pw,data:{full_name:me.fn+" "+me.ln,username:me.u}}});
+    const j=await supaFetch("/auth/v1/signup?redirect_to="+encodeURIComponent(location.origin+location.pathname),{method:"POST",body:{email:em,password:pw,data:{full_name:me.fn+" "+me.ln,username:me.u}}});
     try{localStorage.setItem(PK,JSON.stringify({em,me}))}catch(e){}authBusy=false;suErr="";
     if(j&&j.access_token){setSession(j);await supaStart()}else{authMode="confirm";authMsg="";render();scrollTo(0,0)}
   }catch(e){fail((e&&e.msg)||"Couldn't create the account. Try again.")}}
@@ -1814,6 +1814,8 @@ document.addEventListener("click",e=>{const t=e.target.closest("[data-auth]");if
   else if(SUPA_ON){const h=new URLSearchParams(location.hash.slice(1));
     if(h.get("type")==="recovery"&&h.get("access_token")){history.replaceState(null,"",location.pathname);const tk=h.get("access_token"),u=await supaFetch("/auth/v1/user",null,tk);
       setSession({access_token:tk,refresh_token:h.get("refresh_token"),expires_in:+h.get("expires_in")||3600,user:u});authMode="newpass";BOOT=false;render();return}
+    if(h.get("access_token")&&h.get("refresh_token")){history.replaceState(null,"",location.pathname);const tk=h.get("access_token"),u=await supaFetch("/auth/v1/user",null,tk);
+      setSession({access_token:tk,refresh_token:h.get("refresh_token"),expires_in:+h.get("expires_in")||3600,user:u})}
     if(SESSION){await supaStart();return}}
 }catch(e){}if(BOOT){BOOT=false;render()}})();
 
