@@ -1002,6 +1002,114 @@ body{font-family:var(--gb);color:var(--g-ink);padding:0!important;margin:0}
 .plot .pdot.cur{fill:var(--g-red);stroke:var(--g-red)}
 .plot .pv{font:700 13px var(--gd);fill:var(--g-ink)}
 .plot .px{font:600 11px var(--gb);fill:var(--g-mute)}
+
+/* ================= v3: options, set notes, history, coach analytics ================= */
+#nav{grid-template-columns:repeat(5,minmax(0,1fr))!important}
+#nav button span{font-size:11.5px}
+.vpick{background:var(--g-card);border-radius:16px;padding:12px 12px 12px}
+.vph{display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin-bottom:8px}
+.vph b{font:700 14px var(--gd);letter-spacing:1.6px;text-transform:uppercase;color:var(--g-red)}:root[data-theme="dark"] .vph b{color:#FF6F8A}
+.vph span{font:600 12px var(--gb);color:var(--g-mute);text-align:right}
+.vpc{display:flex;flex-wrap:wrap;gap:7px}
+.vpc button{border:2px solid var(--g-line);background:transparent;color:var(--g-ink);border-radius:11px;padding:8px 12px;font:700 14px var(--gb)}
+.vpc button.on{background:var(--g-navy);border-color:var(--g-navy);color:#fff}
+:root[data-theme="dark"] .vpc button.on{background:#fff;border-color:#fff;color:var(--g-dk)}
+.vpc button.on.auto{border-style:dashed}
+.vpc.solo{margin:2px 0}
+.snote{border-top:2px dashed var(--g-soft);padding-top:10px;display:flex;flex-direction:column;gap:8px}
+.snh{display:flex;align-items:baseline;justify-content:space-between;gap:8px}
+.snh b{font:700 13px var(--gd);letter-spacing:1.6px;text-transform:uppercase;color:var(--g-ink)}.snh span{font:600 11.5px var(--gb);color:var(--g-mute)}
+.snc{display:flex;flex-wrap:wrap;gap:6px}
+.snc button{border:0;background:var(--g-soft);color:var(--g-ink);border-radius:20px;padding:7px 12px;font:700 13px var(--gb)}
+.snc button.on{background:var(--g-teal);color:#fff}
+.sni{width:100%;height:42px;border:2px solid var(--g-line);border-radius:12px;background:transparent;color:var(--g-ink);font:600 15px var(--gb);padding:0 12px}
+.sni:focus{outline:none;border-color:var(--g-teal)}
+.schips button.hn{position:relative}
+.schips button.hn::after{content:"";position:absolute;top:3px;right:3px;width:8px;height:8px;border-radius:50%;background:#F2C744;box-shadow:0 0 0 2px var(--g-card)}
+.histc{background:var(--g-card);border-radius:16px;padding:0 14px 6px}
+.histc .hch{list-style:none;cursor:pointer;display:flex;align-items:baseline;justify-content:space-between;gap:8px;padding:13px 0 9px}
+.histc .hch::-webkit-details-marker{display:none}
+.hch b{font:700 14px var(--gd);letter-spacing:1.6px;text-transform:uppercase}.hch span{font:600 12.5px var(--gb);color:var(--g-mute)}
+.hx{padding:10px 0;border-top:1px solid var(--g-soft)}
+.hxh{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 8px;margin-bottom:6px}
+.hxh b{font:700 15px var(--gb)}.hxh small{font:600 12px var(--gb);color:var(--g-mute)}
+.hvar{font:700 11px var(--gb);letter-spacing:.6px;text-transform:uppercase;background:var(--g-navy);color:#fff;border-radius:6px;padding:2px 7px}
+.hinj{display:inline-block;font:700 12px var(--gb);color:var(--g-red);margin-bottom:4px}
+.hsets{display:flex;flex-wrap:wrap;gap:6px}
+.hs{display:inline-flex;flex-direction:column;background:var(--g-soft);border-radius:10px;padding:5px 9px;line-height:1.2}
+.hs b{font:700 14px var(--gb)}.hs em{font:600 11.5px var(--gb);font-style:normal;color:var(--g-teal)}
+:root[data-theme="dark"] .hs em{color:#7FD6EC}
+.hs.wu{opacity:.7}.hs.nd{opacity:.55;border:1px dashed var(--g-line)}
+.hnote{margin:6px 0 0;font:500 13.5px/1.4 var(--gb);color:var(--g-mute)}
+.hline{margin:2px 0 0;font:600 13.5px/1.45 var(--gb);color:var(--g-ink)}
+.hall{display:flex;align-items:center;justify-content:center;gap:4px;width:100%;border:0;background:none;color:var(--g-red);font:700 14px var(--gb);padding:12px 0 8px}
+:root[data-theme="dark"] .hall{color:#FF6F8A}
+.hwk{font:700 13px var(--gd);letter-spacing:1.8px;text-transform:uppercase;color:var(--g-mute);margin:8px 4px -4px}.hwk span{font:600 12px var(--gb);letter-spacing:0;text-transform:none;margin-left:6px}
+.hsess{background:var(--g-card);border-radius:16px}
+.hsess.in{background:var(--g-soft);margin-top:8px}
+.hsess summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:12px;padding:12px 14px}
+.hsess summary::-webkit-details-marker{display:none}
+.hsess summary::after{content:"+";margin-left:auto;font:700 22px/1 var(--gd);color:var(--g-mute)}.hsess[open] summary::after{content:"–"}
+.hdate{flex:none;width:48px;height:50px;border-radius:12px;background:var(--g-navy);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1}
+.hdate b{font:700 11px var(--gb);letter-spacing:1px;text-transform:uppercase;opacity:.8}.hdate i{font:italic 800 24px var(--gd)}
+.hst{min-width:0}.hst b{display:block;font:700 15.5px/1.2 var(--gb)}.hst small{font:600 12.5px var(--gb);color:var(--g-mute)}
+.hbody{padding:0 14px 4px}
+.hq{height:48px;border:2px solid var(--g-line);border-radius:14px;background:var(--g-card);color:var(--g-ink);font:600 16px var(--gb);padding:0 14px}
+.hq:focus{outline:none;border-color:var(--g-teal)}
+.hlrow,.prow2,.arow,.lbrow,.btnrow{display:flex;align-items:center;gap:10px;width:100%;border:0;background:none;color:var(--g-ink);text-align:left;padding:12px 14px;border-top:1px solid var(--g-soft)}
+.gcard.flush>.hlrow:first-child,.gcard.flush>.prow2:first-child,.gcard.flush>.lbrow:first-child{border-top:0}
+.hln{flex:1;min-width:0}.hln b{display:block;font:700 15px/1.25 var(--gb)}.hln small{font:600 12.5px var(--gb);color:var(--g-mute)}.hln strong{color:var(--g-ink)}
+.spark{flex:none}.spark path{fill:none;stroke:var(--g-teal);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}.spark circle{fill:var(--g-red)}
+.bars{display:block;width:100%;height:auto;margin:4px 0 0}
+.bars .b{fill:var(--g-pill)}.bars .bcur{fill:var(--g-teal)}.bars .bnull{fill:var(--g-soft)}
+.bars .pg{stroke:var(--g-line);stroke-width:1}
+.bars .bv{font:700 11.5px var(--gd);fill:var(--g-ink)}.bars .px{font:600 10.5px var(--gb);fill:var(--g-mute)}
+.ctabs{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;background:var(--g-card);border-radius:14px;padding:5px}
+.ctabs::-webkit-scrollbar{display:none}
+.ctabs button{flex:1 0 auto;border:0;border-radius:10px;background:none;color:var(--g-mute);padding:10px 8px;font:700 13px var(--gd);letter-spacing:.8px;text-transform:uppercase;white-space:nowrap}
+.ctabs button.on{background:var(--g-dk);color:#fff}:root[data-theme="dark"] .ctabs button.on{background:#fff;color:var(--g-dk)}
+.cpos,.csort{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.csort{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}.csort::-webkit-scrollbar{display:none}.csort button{flex:none}
+.cpos button,.csort button{border:2px solid var(--g-line);background:transparent;color:var(--g-mute);border-radius:20px;padding:6px 12px;font:700 13px var(--gb)}
+.cpos button.on,.csort button.on{background:var(--g-red);border-color:var(--g-red);color:#fff}
+.csort span{font:700 12px var(--gb);letter-spacing:1px;text-transform:uppercase;color:var(--g-mute);margin-right:2px}
+.tl b small{font:700 15px var(--gd);opacity:.6}
+.tl.warn{background:#F2C744;color:#3A2A00}.tl.warn span{color:#5A4300}
+.tiles .tl{min-height:0;padding:14px 4px 12px}
+.flag{display:block;font:700 12.5px/1.35 var(--gb);margin-top:2px}
+.flag.red{color:var(--g-red)}:root[data-theme="dark"] .flag.red{color:#FF8A8A}
+.flag.amb{color:#A86F00}:root[data-theme="dark"] .flag.amb{color:#F2C744}
+.flag.gray{color:var(--g-mute)}
+.flag.big{font-size:14px;margin:0 0 6px;padding-left:10px;border-left:4px solid currentColor}
+.pav.sm{width:34px;height:34px;font-size:12px}
+.prow2 .pnm em,.lbrow .pnm em,.lfrow .pnm em{font:700 10.5px var(--gb);font-style:normal;letter-spacing:.6px;text-transform:uppercase;background:var(--g-soft);color:var(--g-mute);border-radius:5px;padding:1px 6px;margin-left:4px;vertical-align:2px}
+.prow2{border-left:6px solid transparent}.prow2.good{border-left-color:var(--g-teal)}.prow2.mid{border-left-color:#F2C744}.prow2.none{border-left-color:var(--g-red)}
+.pp2 i.due{background:transparent;box-shadow:inset 0 0 0 2px var(--g-red)}
+.heat{display:grid;grid-template-columns:minmax(92px,1.4fr) repeat(var(--n),minmax(0,1fr));gap:4px;align-items:center}
+.heat>b{font:700 11px var(--gb);color:var(--g-mute);text-align:center}
+.heat .hname{border:0;background:none;color:var(--g-ink);font:700 13px var(--gb);text-align:left;padding:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.heat i,.strip i,.clegend2 i{display:flex;align-items:center;justify-content:center;height:26px;border-radius:6px;font:700 12px var(--gb);font-style:normal;color:#fff}
+.heat i.g,.strip i.g,.clegend2 i.g{background:var(--g-teal)}
+.heat i.m,.strip i.m,.clegend2 i.m{background:#F2C744;color:#3A2A00}
+.heat i.z,.strip i.z,.clegend2 i.z{background:var(--g-red)}
+.heat i.n,.strip i.n,.clegend2 i.n{background:var(--g-soft)}
+.heat i.s{background:var(--g-soft)}
+.heat i.f,.strip i.f,.clegend2 i.f{background:transparent;box-shadow:inset 0 0 0 1.5px var(--g-line);color:var(--g-mute)}
+.clegend2{display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:12px;font:600 12px var(--gb);color:var(--g-mute)}
+.clegend2 span{display:flex;align-items:center;gap:5px}.clegend2 i{width:14px;height:14px;border-radius:4px}
+.strip{display:grid;grid-template-columns:repeat(auto-fill,minmax(30px,1fr));gap:4px}
+.strip i{height:38px;flex-direction:column;line-height:1}.strip i b{font:600 9.5px var(--gb);opacity:.85}
+.strip i.now{outline:3px solid var(--g-ink);outline-offset:1px}
+.lsel{display:flex;flex-direction:column;gap:5px;font:700 12px var(--gb);letter-spacing:1px;text-transform:uppercase;color:var(--g-mute)}
+.lsel select{height:48px;border:2px solid var(--g-line);border-radius:14px;background:var(--g-card);color:var(--g-ink);font:700 15px var(--gb);padding:0 10px;text-transform:none;letter-spacing:0}
+.rk{flex:none;width:30px;height:30px;border-radius:50%;background:var(--g-soft);display:flex;align-items:center;justify-content:center;font:italic 800 16px var(--gd)}
+.rk.top{background:var(--g-red);color:#fff}
+.lbv{flex:none;font:italic 800 24px/1 var(--gd);font-style:italic;min-width:52px;text-align:right}
+.lbv.up{color:var(--g-teal)}
+.lfrow{display:flex;align-items:center;gap:10px;padding:10px 0;border-top:1px solid var(--g-soft)}
+.lfrow:first-of-type{border-top:0}.lfrow .pnm strong{color:var(--g-ink)}
+.btnrow{padding:9px 0;width:100%}.recs .btnrow:first-child{border-top:0}
+.strip i.s{background:transparent;box-shadow:inset 0 0 0 1.5px var(--g-line);color:var(--g-mute)}
 </style>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,700;1,700;1,800&family=Barlow:wght@500;600;700&display=swap" rel="stylesheet">
 </head>
@@ -1029,7 +1137,7 @@ const LS="cleary-lift-2627-v1";
 try{const s=JSON.parse(localStorage.getItem(LS)||"{}");LOG=s.log||{};Object.assign(CFG,s.cfg||{})}catch(e){}
 const P=()=>PH[ph];
 const K=(p,w,d)=>PH[p].id+"-w"+(w+1)+"-"+d;
-function rec(p,w,d){const k=K(p,w,d);const r=LOG[k]=LOG[k]||{};r.s=r.s||{};r.u=r.u||{};r.n=r.n||{};r.c=r.c||{};r.x=r.x||{};return r}
+function rec(p,w,d){const k=K(p,w,d);const r=LOG[k]=LOG[k]||{};r.s=r.s||{};r.u=r.u||{};r.n=r.n||{};r.c=r.c||{};r.x=r.x||{};r.v=r.v||{};return r}
 const peek=(p,w,d)=>LOG[K(p,w,d)];
 let DB=null,UID=null,dirty=new Set(),busy={},tm=null;
 function local(){try{localStorage.setItem(LS,JSON.stringify({log:LOG,cfg:CFG}))}catch(e){}}
@@ -1042,7 +1150,7 @@ async function bootData(db,user,id){try{DB=db;UID=id;
   snap.docs.forEach(d=>{if(!d.exists)return;seen.add(d.id);const R=d.data()||{};
     if(d.id==="cfg"){if(!dirty.has("cfg"))Object.assign(CFG,R.cfg||{});return}
     if(!/^p\d+-w\d-d\d$/.test(d.id)&&!/^nut-\d{4}-\d{2}$/.test(d.id))return;
-    const Lc=LOG[d.id]||{},m={};["s","u","n","c","x","t","d"].forEach(f=>{m[f]=Object.assign({},R[f]||{});Object.keys(Lc[f]||{}).forEach(x=>m[f][x]=Lc[f][x])});LOG[d.id]=m;
+    const Lc=LOG[d.id]||{},m={};["s","u","n","c","x","t","d","v"].forEach(f=>{m[f]=Object.assign({},R[f]||{});Object.keys(Lc[f]||{}).forEach(x=>m[f][x]=Lc[f][x])});LOG[d.id]=m;
     if(JSON.stringify(m)!==JSON.stringify(R))dirty.add(d.id)});
   Object.keys(LOG).forEach(k=>{if(!seen.has(k))dirty.add(k)});
   local();if(!document.activeElement||!document.activeElement.matches("input,textarea"))render();if(dirty.size)flush();teamInit(db,user,id)}catch(e){}}
@@ -1077,7 +1185,7 @@ function dayPct(p,w,d){if(skipMsg(p,w,d))return null;const Q=PH[p],r=peek(p,w,d)
     tot+=t;got+=g;pend={t,g}})});
   return tot?Math.min(1,got/tot):null}
 const isDone=(p,w,d)=>{const x=dayPct(p,w,d);return x!=null&&x>=.999};
-function lastVal(bi,ei,si){for(let w=wk-1;w>=0;w--){const p=peek(ph,w,day);const v=p&&p.s&&p.s[bi+"."+ei+"."+si];if(v&&(v.w||v.r))return{w,v}}return null}
+function lastVal(bi,ei,si){const cv=curVariant(bi,ei).v;for(let w=wk-1;w>=0;w--){const p=peek(ph,w,day);const v=p&&p.s&&p.s[bi+"."+ei+"."+si];if(v&&(v.w||v.r)&&sameVar(cv,varAt(ph,w,day,bi,ei)))return{w,v,vr:varAt(ph,w,day,bi,ei)}}return null}
 function topSet(p,w,d,bi,ei){const r=peek(p,w,d),W=Wk(PH[p].prog[d][bi].ex[ei],w);if(!r||!r.s||!W||W.count)return 0;let t=0;rows(W).forEach((R,si)=>{if(R.warm)return;const v=r.s[bi+"."+ei+"."+si];if(v&&+v.w>t)t=+v.w});return t}
 function phaseSessions(p){let done=0,tot=0;PH[p].weeks.forEach((_,w)=>PH[p].days.forEach(D=>{const x=dayPct(p,w,D.k);if(x==null)return;tot++;if(x>=.999)done++}));return{done,tot}}
 
@@ -1298,6 +1406,7 @@ const I={
   bolt:'<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg>',
   cal:'<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>',
   cup:'<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4h10v5a5 5 0 0 1-10 0zM7 6H4v1a3 3 0 0 0 3 3M17 6h3v1a3 3 0 0 1-3 3M12 14v4M8 20h8"/></svg>',
+  hist:'<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5M12 7v5l3 2"/></svg>',
   dots:'<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg>'};
 function applyTheme(){document.documentElement.dataset.theme=CFG.dark?"dark":"light"}
 
@@ -1334,14 +1443,14 @@ const shieldSvg=(fill,stroke)=>`<svg width="18" height="20" viewBox="0 0 40 46" 
 /* ---- shared chrome ---- */
 function hero(inner,cls){return `<div class="hero ${cls||""}"><div class="hbg" aria-hidden="true"></div><div class="hred" aria-hidden="true"></div><div class="claws" aria-hidden="true"><i></i><i></i><i></i></div><div class="hin">${inner}</div></div>`}
 function topbar(title,sub,back){return hero(`<div class="trow"><button class="ibtn" data-back="${back}" aria-label="Back">${I.back}</button><div class="ttl"><b>${esc(title)}</b>${sub?`<small>${esc(sub)}</small>`:""}</div><img class="hlogo sm" src="${LOGO_CU}" alt="Cleary Cougars"></div>`,"tbar")}
-function navHTML(){const on=view==="today"||view==="lineup"||view==="station"?"today":view==="season"?"season":view==="trophies"||/^wall/.test(view)?"trophies":"more";
-  return [["today","Today",I.bolt],["season","Season",I.cal],["trophies","Trophies",I.cup],["more","More",I.dots]].map(([k,l,ic])=>`<button class="${on===k?"on":""}" data-nav="${k}">${ic}<span>${l}</span><i></i></button>`).join("")}
+function navHTML(){const on=view==="today"||view==="lineup"||view==="station"?"today":view==="season"?"season":view==="history"||view==="histlift"?"history":view==="trophies"||/^wall/.test(view)?"trophies":"more";
+  return [["today","Today",I.bolt],["season","Season",I.cal],["history","History",I.hist],["trophies","Trophies",I.cup],["more","More",I.dots]].map(([k,l,ic])=>`<button class="${on===k?"on":""}" data-nav="${k}">${ic}<span>${l}</span><i></i></button>`).join("")}
 function render(){applyTheme();TALLY=null;celebrated.clear();const m=$("#main"),nav=$("#nav");
   if(AUTHDEMO||(SUPA_ON&&(!SESSION||authMode==="newpass"))){nav.style.display="none";m.innerHTML=authHTML();return}
   if(BOOT&&!CFG.me){nav.style.display="none";m.innerHTML=`<div class="splash"><img src="${LOGO_CU}" alt="Cleary Cougars"><p>Loading your account…</p></div>`;return}
   if(!CFG.me||view==="welcome"){nav.style.display="none";m.innerHTML=CFG.me?welcomeHTML():signupHTML();return}
   if(!CFG.tut||tutReplay){nav.style.display="none";m.innerHTML=tutorialHTML();return}
-  if(view==="coach"&&!isCoach())view="more";
+  if((view==="coach"||view==="cplayer")&&!isCoach())view="more";
   const legacy={progress:["Progress","Your top sets, week by week",progressHTML],setup:["Nutrition","Macros and weigh-ins",setupHTML],notes:["Coach's notes","RPE, tempo, rep max and more",notesHTML],guide:["How to use this app","",guideHTML],test:["Test page","Temporary",testHTML]};
   nav.style.display=view==="station"?"none":"";nav.innerHTML=navHTML();
   if(view==="today")m.innerHTML=todayHTML();
@@ -1351,6 +1460,9 @@ function render(){applyTheme();TALLY=null;celebrated.clear();const m=$("#main"),
   else if(view==="trophies")m.innerHTML=trophiesHTML();
   else if(view==="more")m.innerHTML=moreHTML();
   else if(view==="coach")m.innerHTML=coachHTML();
+  else if(view==="cplayer")m.innerHTML=cPlayerHTML();
+  else if(view==="history")m.innerHTML=historyHTML();
+  else if(view==="histlift")m.innerHTML=histLiftHTML();
   else if(view==="account")m.innerHTML=signupHTML(true);
   else if(/^wall/.test(view))m.innerHTML=topbar("My records","Your best on every lift","trophies")+`<div class="legacy">${wallHTML()}</div>`;
   else{const L=legacy[view]||legacy.guide;m.innerHTML=topbar(L[0],view==="progress"?"Phase "+P().n+" · "+P().name:L[1],"more")+(view==="progress"?weekChips():"")+`<div class="legacy">${L[2]()}</div>`}}
@@ -1433,18 +1545,20 @@ function liftHTML(){const bi=stn,Q=P(),b=Q.prog[day][bi],Lt=LET[bi],L=liveEx(bi)
   if(b.amrap)h+=`<div class="amrap2"><button class="gsm" data-clock="${b.amrap}">▶ Start ${b.amrap}:00 clock</button><label>Rounds<input inputmode="decimal" data-x="r${bi}" value="${esc(r.x["r"+bi]||"")}" placeholder="—"></label></div>`;
   h+=`<div class="lname"><div class="lrow2"><h1><span class="tagc">${Lt}${cur.ei+1}</span> ${esc(e.name)}</h1><div class="bdg">${badgesHTML(ST)}</div></div>
     <div class="lplan">${e.alt?esc(e.alt)+" · ":""}Today: ${esc(setsPhrase(W,e))}${W.wu?` + ${W.wu.length} ${/build/i.test(W.wu[0][1])?"build-up":"warm-up"} set${W.wu.length>1?"s":""}`:""}</div></div>`;
+  h+=varPickHTML(bi,cur.ei,e);
   h+=nv?`<button class="vcard" data-vid="ex|${bi}|${cur.ei}"><span class="vbg" aria-hidden="true"></span><span class="vplay">${I.play}</span><span class="vtag">Watch the coach's demo${nv>1?" · "+nv+" videos":""}</span></button>`:"";
   const hPre=h,SK=injEx(bi,cur.ei);
   h+=`<div class="setcard ${ST.done?"exdone":""} ${v.d?"isdone":""}"><div class="bigstamp" aria-hidden="true">Done</div>
     <div class="schips" role="group" aria-label="Sets">${R.map((x,i)=>{const dn=rowDone(bi,cur.ei,i),t=x.warm?"W"+(warm.length>1?warm.indexOf(x)+1:""):String(work.indexOf(x)+1);
-      return `<button class="${dn?"on":""} ${i===si?"cur":""} ${x.warm?"wu":""} ${x.opt?"opt":""}" data-pill="${i}" aria-label="${esc(x.lab)}${dn?", done":""}">${dn&&i!==si?I.check:t}</button>`}).join("")}</div>
+      return `<button class="${dn?"on":""} ${i===si?"cur":""} ${x.warm?"wu":""} ${x.opt?"opt":""} ${(r.s[bi+"."+cur.ei+"."+i]||{}).nt?"hn":""}" data-pill="${i}" aria-label="${esc(x.lab)}${dn?", done":""}">${dn&&i!==si?I.check:t}</button>`}).join("")}</div>
     <div class="shead"><b class="${Rw.warm?"wu":""}">${esc(lab)}${Rw.opt?" · optional":""}</b>${extra?`<span>${esc(extra)}</span>`:""}</div>
     <div class="dogrid ${W.wt?"":"one"}"><div class="dobox"><small>${Pt.secs?"Hold for":Pt.rm?"Work up to":"Do"}</small><b>${esc(Pt.big)}</b><span>${esc(Pt.small||(Pt.rm?"rep max":Pt.secs?"":""))}</span></div>
      ${W.wt?`<div class="dobox w"><small>Weight</small><div class="stepper"><button data-step="-5" aria-label="5 pounds lighter">−5</button><label class="wbig"><input id="wIn" inputmode="decimal" data-fw="${k}" value="${esc(wv)}" placeholder="0" aria-label="Weight in pounds"><span>lb</span></label><button data-step="5" aria-label="5 pounds heavier">+5</button></div></div>`:""}</div>`;
   if(Pt.secs)h+=`<button class="tgo" data-hold="${Pt.secs}" data-sides="${Pt.sides?1:0}" data-k="${k}">${I.play}<span>Start the ${Pt.secs}s timer${Pt.sides?" · both sides":""}</span></button>`;
   if(W.log)h+=`<label class="repsin">Your ${esc(W.log)}<input data-fr="${k}" value="${esc(v.r||"")}" placeholder="1:45"></label>`;
   else if(Pt.inR&&!Rw.warm)h+=`<label class="repsin">Reps you got<input inputmode="numeric" data-fr="${k}" value="${esc(v.r||"")}" placeholder="${esc(Pt.big.replace(/ RM/,""))}"></label>`;
-  h+=`<div class="lastl">${lv&&lv.v.w?`Last time (Wk ${Q.weeks[lv.w].n}): <b>${esc(lv.v.w)} lb${lv.v.r?" × "+esc(lv.v.r):""}</b>.${goal?` Today's target: <b>${goal} lb</b>.`:""}`:W.load?esc(W.load):W.wt?"First time on this lift. Pick a weight that fits the coach's note.":""}</div>`;
+  h+=setNoteHTML(k,e,v);
+  h+=`<div class="lastl">${lv&&lv.v.w?`Last time (Wk ${Q.weeks[lv.w].n}${lv.vr?" · "+esc(lv.vr):""}${lv.v.nt?" · "+esc(lv.v.nt):""}): <b>${esc(lv.v.w)} lb${lv.v.r?" × "+esc(lv.v.r):""}</b>.${goal?` Today's target: <b>${goal} lb</b>.`:""}`:W.load?esc(W.load):W.wt?"First time on this lift. Pick a weight that fits the coach's note.":""}</div>`;
   h+=v.d?`<div class="drow"><button class="undo" data-undo="${k}">Logged ${I.check} Undo</button><button class="skew red sm" data-next="1">${nt?"Next set":"Finish block"}</button></div>`
         :`<button class="skew red done" data-done="${k}">${nt&&nt.ei!==cur.ei&&!b.seq?`Done → ${Lt}${nt.ei+1}`:"Done"}</button>`;
   h+=`</div>`;
@@ -1453,13 +1567,14 @@ function liftHTML(){const bi=stn,Q=P(),b=Q.prog[day][bi],Lt=LET[bi],L=liveEx(bi)
   else if(!injDay(ph,wk,day))h+=`<button class="injb" data-inj="${bi}.${cur.ei}">${I.x||""}Injured? Skip ${esc(short(e.name))}</button>`;
   const coach=[W.note?(NOTE_PLAIN[W.note]||W.note):""].concat(e.cues||[]).filter(Boolean);
   if(coach.length)h+=`<div class="bubble"><span class="av">MB</span><div><small>Coach Mike</small>${esc(coach[0])}</div></div>`;
+  h+=liftHistCard(e);
   const pct=W.pct?(()=>{const bw=+CFG.bw,lo=Math.round(W.pct[0]*100),hi=Math.round(W.pct[1]*100);return `Suggested starting weight: ${lo===hi?lo:lo+"-"+hi}% of bodyweight${bw?` ≈ ${Math.round(bw*W.pct[0]/5)*5}${lo!==hi?"-"+Math.round(bw*W.pct[1]/5)*5:""} lb`:""}`})():"";
   h+=`<details class="more2"><summary>More from the coach · options · your notes</summary><div class="mbody">
     ${coach.slice(1).map(c=>`<p class="cuel">Coach: ${esc(c)}</p>`).join("")}${W.load&&lv&&lv.v.w?`<p><b>Load:</b> ${esc(W.load)}</p>`:""}${pct?`<p>${esc(pct)}</p>`:""}
     ${(e.opts||[]).map(([a,t])=>`<p><b>${esc(a)}</b> ${esc(t)}</p>`).join("")}${e.photo?`<p><a href="${esc(e.photo)}" target="_blank" rel="noopener noreferrer">Coach's photo (opens Google Drive)</a></p>`:""}
     ${abbrLine([e.name,e.alt||"",(e.opts||[]).map(o=>o[1]).join(" ")].join(" "),"abbr2")}
     <h4>How Block ${Lt} works</h4><ol>${blockSteps(b,bi).map(s=>`<li>${s}</li>`).join("")}</ol>
-    <textarea class="note2" rows="2" data-n="${bi}.${cur.ei}" placeholder="Your note (grip, box height, how it felt)">${esc(r.n[bi+"."+cur.ei]||"")}</textarea>
+    <textarea class="note2" rows="2" data-n="${bi}.${cur.ei}" placeholder="Note for the whole exercise (box height, how it felt)">${esc(r.n[bi+"."+cur.ei]||"")}</textarea>
     <button class="resetday" data-reset="${bi}">↺ Reset Block ${Lt}</button></div></details>`;
   const ne=nt?b.ex[nt.ei]:null,S=stops(),myI=S.findIndex(s=>s.k===bi),after=S[myI+1];
   h+=`<button class="upnext" ${nt?`data-jumpset="${nt.ei}|${nt.si}"`:`data-back="lineup"`}><span><small>After this</small><b>${nt?`${Lt}${nt.ei+1} · ${esc(short(ne.name))} · ${esc(rows(Wk(ne,wk))[nt.si].lab.split(" · ")[0])}`:after?esc((after.k==="wu"?"Warm-up":"Block "+after.letter)+" · "+after.sub):"Finish line"}</b></span>${I.fwd}</button></div>`;
@@ -1468,7 +1583,7 @@ function flyAt(x,y,html,cls){if(noFx())return;const d=document.createElement("di
 function slam(){if(noFx())return;const d=document.createElement("div");d.className="slamfx";d.innerHTML="<span>Done</span>";document.body.appendChild(d);setTimeout(()=>d.remove(),1000)}
 function logSet(k,rect){const a=k.split("."),bi=+a[0],ei=+a[1],si=+a[2],r=rec(ph,wk,day),v=r.s[k]=r.s[k]||{},dk=K(ph,wk,day)+":"+k,old=exState(bi,ei);
   const wi=document.querySelector(`[data-fw="${k}"]`),ri=document.querySelector(`[data-fr="${k}"]`);
-  if(wi)v.w=wi.value.trim();if(ri&&ri.value.trim())v.r=ri.value.trim();v.d=1;v.t=v.t||todayISO();delete DRAFT[dk];save(K(ph,wk,day));
+  {const id=bi+"."+ei;if(!r.v[id]){const cv=curVariant(bi,ei);if(cv.v)r.v[id]=cv.v}}if(wi)v.w=wi.value.trim();if(ri&&ri.value.trim())v.r=ri.value.trim();v.d=1;v.t=v.t||todayISO();delete DRAFT[dk];save(K(ph,wk,day));
   const st=exState(bi,ei),x=rect?rect.left+rect.width/2:innerWidth/2,y=rect?rect.top:innerHeight/2;
   flyAt(x,y,nextEmo());
   if(st.tier>(old.tier||0))setTimeout(()=>flyAt(x,y-10,shieldHTML(st.tier,st.diff),"shf"),200);
@@ -1490,10 +1605,11 @@ function trophiesHTML(){const t=tally(),E=prEvents();
 /* ---- MORE ---- */
 function moreHTML(){const row=(v,t,d,attr)=>`<button class="mrow2" ${attr||`data-v="${v}"`}><span><b>${t}</b><small>${d}</small></span>${I.fwd}</button>`;
   return topbar("More","","today")+`<div class="body"><div class="gcard flush">
-   ${isCoach()?row("coach","Coach's view","Everyone's week, plus the sign-up list"):""}
+   ${isCoach()?row("coach","Coach's view","Team trends, who needs a look, leaderboards, every player's numbers"):""}
    ${row("account","My account",CFG.me?esc("@"+CFG.me.u+" · "+CFG.me.fn+" "+CFG.me.ln+" · "+CFG.me.pos):"Your name and details")}
    ${row("guide","How to use this app","Everything it does, in two minutes")}
    ${row("","Replay the tutorial","The six-step walkthrough from your first day",'data-tut="replay"')}
+    ${row("history","History","Every workout and every lift you've logged, with your notes")}
    ${row("progress","Progress","Top sets week by week, and what you logged")}
    ${row("setup","Nutrition","Daily macros, calories and weigh-ins")}
    ${row("notes","Coach's notes","RPE, tempo, rep max, in-season rules")}
@@ -1583,19 +1699,10 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape"){if(!$("#vidov").hid
   if(e.key==="Enter"&&e.target.matches("input[data-nd],input[data-nt]")){e.preventDefault();const all=[...document.querySelectorAll("input[data-nt],input[data-nd]")];const n=all[all.indexOf(e.target)+1];if(n)n.focus();else e.target.blur()}});
 
 /* ======================= TEAM: sign-ups, roles, coach's view ======================= */
-let ME=null,TEAM={roster:{},roles:{},sums:{},names:{},demo:false,loaded:false},cview="overview",copen=null,lastSum="";
+let ME=null,TEAM={roster:{},roles:{},sums:{},names:{},demo:false,loaded:false},cview="team",copen=null,lastSum="";
 const isCoach=()=>TEAM.demo||!!(ME&&(ME.owner||ME.coach||TEAM.roles[ME.id]==="coach"));
-function prEvents(){const out=[];Object.keys(NAMEIDX).forEach(key=>{const L=NAMEIDX[key],hits=[];
-  L.forEach(x=>PH[x.p].weeks.forEach((_,w)=>{const t=topSet(x.p,w,x.d,x.bi,x.ei);if(t)hits.push({o:ord(x.p,w,x.di),t,p:x.p,w,d:x.d,bi:x.bi,ei:x.ei})}));
-  hits.sort((a,b)=>a.o-b.o);let best=0;hits.forEach((h,i)=>{if(i&&h.t>best){const r=peek(h.p,h.w,h.d);let when="";Object.keys((r&&r.s)||{}).forEach(k=>{if(k.startsWith(h.bi+"."+h.ei+".")&&+r.s[k].w===h.t&&r.s[k].t)when=r.s[k].t});
-      out.push({name:L[0].name,w:h.t,prev:best,dt:when?pd(when):dayDate(h.p,h.w,h.d)||pd(PH[h.p].weeks[h.w].mon),ph:PH[h.p].n,wk:PH[h.p].weeks[h.w].n,o:h.o})}if(h.t>best)best=h.t})});
-  return out.sort((a,b)=>b.o-a.o)}
 function injList(p,w){const out=[];PH[p].days.forEach(D=>{const r=peek(p,w,D.k);if(!r||!r.x)return;if(r.x.inj){out.push("Whole lift ("+D.s+")");return}
   (PH[p].prog[D.k]||[]).forEach((b,bi)=>b.ex.forEach((e,ei)=>{if(r.x["i"+bi+"."+ei])out.push(e.name.replace(/ \(.*\)$/,"")+" ("+D.s+")")}))});return out.slice(0,8)}
-function mySummary(){const T=findToday(),R=weekRecap(T.p,T.w),t=tally();let sessions=0,last="";PH.forEach((_,p)=>sessions+=phaseSessions(p).done);
-  Object.keys(LOG).forEach(k=>{if(!/^p\d+-w\d-d\d$/.test(k))return;Object.values(LOG[k].s||{}).forEach(v=>{if(v.t&&v.t>last)last=v.t})});
-  const M=CFG.me||{};
-  return{v:1,ht:M.ht||"",sw:M.sw||"",gw:M.gw||"",ph:PH[T.p].n,wk:PH[T.p].weeks[T.w].n,wd:R.done,wt:R.tot,sessions,prs:t.prs,tiers:t.tiers,trophies:t.trophies,last,inj:injList(T.p,T.w),recent:prEvents().slice(0,5).map(x=>({n:x.name,w:x.w,d:nice(x.dt)}))}}
 async function pushSummary(){if(!DB||!ME)return;try{TALLY=null;const s=mySummary(),j=JSON.stringify(s);if(j===lastSum)return;lastSum=j;s.at=new Date().toISOString();await DB.collection("summary").doc(ME.id).set(s)}catch(e){}}
 async function teamInit(db,user,id){try{USERAPI=user;ME={id,owner:!!(user.isOwner&&await user.isOwner()),coach:!!(user.isCoach&&await user.isCoach())};
     const mine=await db.collection("roster").doc(id).get();if(!mine.exists)await db.collection("roster").doc(id).set(Object.assign({joined:todayISO()},pubMe()));else if(CFG.me&&!(mine.data()||{}).u)await db.collection("roster").doc(id).set(Object.assign({},mine.data()||{},pubMe()));
@@ -1609,41 +1716,6 @@ async function teamLoad(){if(!DB||!ME)return;try{const user=USERAPI;
     TEAM.loaded=true;if(view==="coach"||view==="more")render()}catch(e){TEAM.loaded=true}}
 async function setRole(id,role){if(TEAM.demo){TEAM.roles[id]=role;render();return}if(!DB||!ME||!isCoach())return;const was=TEAM.roles[id];TEAM.roles[id]=role;render();
   try{await DB.collection("roles").doc(id).set({role})}catch(e){TEAM.roles[id]=was;render();toast("Couldn't save that role change")}}
-function demoTeam(on){TEAM.demo=on;if(!on){TEAM.roster={};TEAM.roles={};TEAM.sums={};TEAM.names={};if(DB)teamLoad();return}
-  const T=findToday(),wkN=PH[T.p].weeks[T.w].n,phN=PH[T.p].n;
-  const mk=(n,j,wd,ses,prs,tiers,last,recent,stale)=>{const id="demo-"+n.replace(/\W/g,"");TEAM.roster[id]={joined:j};TEAM.names[id]=n;TEAM.sums[id]={ph:phN,wk:stale?wkN-1:wkN,wd,wt:3,sessions:ses,prs,tiers,trophies:0,last,recent}};
-  TEAM.roster={};TEAM.sums={};TEAM.names={};TEAM.roles={};
-  mk("Sample Player A","2026-11-09",3,9,4,[0,5,3,1],"2026-11-12",[{n:"Front Squat",w:225,d:"Nov 12"},{n:"Trap Bar Deadlift",w:365,d:"Nov 11"}]);
-  mk("Sample Player B","2026-11-09",2,8,2,[0,3,1,0],"2026-11-11",[{n:"DB (or) Barbell Bench Press",w:205,d:"Nov 9"}]);
-  mk("Sample Player C","2026-11-10",1,5,1,[0,2,0,0],"2026-11-09",[{n:"SL RDL (you pick)",w:95,d:"Nov 9"}]);
-  mk("Sample Player D","2026-11-10",0,3,0,[0,1,0,0],"2026-11-05",[],true);
-  mk("Sample Player E","2026-11-12",0,0,0,[0,0,0,0],"",[]);
-  mk("Sample Coach","2026-11-09",0,0,0,[0,0,0,0],"",[]);TEAM.roles["demo-SampleCoach"]="coach";["A","B","C","D","E"].forEach((x,i)=>{const s=TEAM.sums["demo-SamplePlayer"+x];if(s){s.ht=["6'1\"","5'11\"","6'3\"","6'0\"","5'10\""][i];s.sw=String(175+i*7);s.gw=String(185+i*7)}});const sc=TEAM.sums["demo-SamplePlayerC"];if(sc){sc.inj=["Trap Bar Deadlift (Wed)"];sc.wk=PH[findToday().p].weeks[findToday().w].n}}
-function coachHTML(){const T=findToday(),wkN=PH[T.p].weeks[T.w].n,ids=Object.keys(TEAM.roster),nm=i=>{const R=TEAM.roster[i]||{};return ((R.fn||"")+" "+(R.ln||"")).trim()||TEAM.names[i]||"Player "+i.slice(-4)};
-  const role=i=>ME&&i===ME.id&&(ME.owner||ME.coach)?"head":TEAM.roles[i]==="coach"?"coach":"player";
-  const players=ids.filter(i=>role(i)==="player").map(i=>{const s=TEAM.sums[i]||{},cur=s.wk===wkN;return{i,s,wd:cur?s.wd||0:0,wt:cur&&s.wt?s.wt:PH[T.p].days.length}});
-  players.sort((a,b)=>a.wd-b.wd||nm(a.i).localeCompare(nm(b.i)));
-  const lifted=players.filter(p=>p.wd>0).length,prs=players.reduce((n,p)=>n+(p.s.prs||0),0);
-  let h=topbar("Coach's view","Week "+wkN+" · "+weekRange(T.p,T.w),"more")+`<div class="body">`;
-  if(TEAM.demo)h+=`<div class="demobar">Sample team for preview. Turn it off on the test page.</div>`;
-  h+=`<div class="tiles t3"><div class="tl"><b>${players.length}</b><span>Players</span></div><div class="tl"><b>${lifted}</b><span>Lifted this week</span></div><div class="tl navy"><b>${prs}</b><span>PRs this season</span></div></div>
-   ${quoteHTML(true)}
-   <div class="seg s3"><button class="${cview==="overview"?"on":""}" data-cv="overview">Overview</button><button class="${cview==="list"?"on":""}" data-cv="list">List · ${ids.length}</button><button class="${cview==="quotes"?"on":""}" data-cv="quotes">Quotes</button></div>`;
-  if(cview==="overview"){
-    if(!players.length)h+=`<div class="gcard"><h2>No players yet</h2><p class="gp">Everyone who opens the app shows up here automatically as a player. To see what this page looks like with a team, load the sample team on the test page.</p></div>`;
-    players.forEach(p=>{const s=p.s,cur=s.wk===wkN,open=copen===p.i,sh=(s.tiers||[0,0,0,0]),st=p.wd>=p.wt?"good":p.wd>0?"mid":"none";
-      h+=`<div class="pl2 ${st} ${open?"open":""}"><button class="plh" data-cp="${esc(p.i)}"><span class="pav">${esc(nm(p.i).split(/\s+/).map(x=>x[0]).slice(0,2).join("").toUpperCase())}</span>
-        <span class="pnm"><b>${esc(nm(p.i))}</b><small>${s.last?"Last lift "+nice(pd(s.last)):"No lifts logged yet"}</small></span>
-        <span class="pwk"><span class="pp2">${Array.from({length:p.wt},(_,i)=>`<i class="${i<p.wd?"on":""}"></i>`).join("")}</span><small>${p.wd}/${p.wt} this week</small></span></button>
-        ${open?`<div class="pld">${s.ht||s.sw||s.gw?`<p class="gp body3">${[s.ht?"<b>"+esc(s.ht)+"</b> tall":"",s.sw?"started at <b>"+esc(s.sw)+" lb</b>":"",s.gw?"goal <b>"+esc(s.gw)+" lb</b>":""].filter(Boolean).join(" · ")}</p>`:""}<div class="rgrid2"><div><b>${s.sessions||0}</b><span>lifts logged</span></div><div><b>${s.prs||0}</b><span>PRs</span></div><div><b>${sh[1]+sh[2]+sh[3]}</b><span>shields</span></div><div><b>${s.trophies||0}</b><span>trophies</span></div></div>
-          ${s.ph?`<p class="gp">Working in <b>Phase ${s.ph}, Week ${s.wk}</b>${s.wk!==wkN?" (hasn't opened the app this week)":""}.</p>`:""}
-          ${cur&&(s.inj||[]).length?`<p class="gp injp"><b>Skipped for injury this week:</b> ${s.inj.map(esc).join(", ")}</p>`:""}${(s.recent||[]).length?`<p class="gp"><b>Latest PRs</b></p>${s.recent.map(x=>`<div class="rec"><span><b>${esc(x.n)}</b><small>${esc(x.d)}</small></span><em>${esc(x.w)}<small>lb</small></em></div>`).join("")}`:`<p class="gp">No PRs yet.</p>`}</div>`:""}</div>`})}
-  else if(cview==="quotes")h+=quoteListHTML();
-  else{h+=`<div class="gcard flush">${ids.length?ids.sort((a,b)=>(TEAM.roster[a].joined||"").localeCompare(TEAM.roster[b].joined||"")||nm(a).localeCompare(nm(b))).map(i=>{const r=role(i),can=isCoach()&&r!=="head";
-      return `<div class="mlrow"><span class="pnm"><b>${esc(nm(i))}${ME&&i===ME.id?" (you)":""}</b><small>${TEAM.roster[i].u?"@"+esc(TEAM.roster[i].u)+" · ":""}${TEAM.roster[i].pos?esc(TEAM.roster[i].pos)+" · ":""}Signed up ${TEAM.roster[i].joined?nice(pd(TEAM.roster[i].joined)):"—"}</small></span>
-        ${r==="head"?`<span class="rtag">${SUPA_ON?"Coach":"Assistant coach"}</span>`:can?`<span class="rsw"><button class="${r==="player"?"on":""}" data-role="${esc(i)}|player">Player</button><button class="${r==="coach"?"on":""}" data-role="${esc(i)}|coach">Coach</button></span>`:`<span class="rtag">${r==="coach"?"Coach":"Player"}</span>`}</div>`}).join(""):`<p class="gp" style="padding:12px 16px">Nobody has signed up yet.</p>`}</div>
-     <p class="gp lead">Everyone starts as a player the first time they open the app. Every coach has the same abilities: this page, and switching anyone between player and coach.</p>`}
-  return h+`</div>`}
 
 /* ======================= SEASON CALENDAR ======================= */
 const CAL0=pd(PH[0].weeks[0].mon),CALZ=addD(pd(PH[PH.length-1].weeks.slice(-1)[0].mon),6),CAL_N=(CALZ.getFullYear()-CAL0.getFullYear())*12+CALZ.getMonth()-CAL0.getMonth()+1;
@@ -1746,8 +1818,8 @@ const TUT=[
   a:()=>`<div class="tm row"><span class="tplay">${I.play}</span><span class="tring teal"><b>2:00</b><small>rest</small></span></div>`},
  {k:"Step 5",t:"Earn it",p:"Add 5, 10 or 15 pounds over last week for a bronze, silver or gold shield. Beat your best ever on a lift and you get the CU PR mark.",
   a:()=>`<div class="tm row big">${shieldSvg("#C8875A","#5A3210")}${shieldSvg("#C9D1DA","#3A4350")}${shieldSvg("#F2C744","#4A3200")}<img src="${LOGO_PR}" alt=""></div>`},
- {k:"Step 6",t:"Everything else",p:"Season is your calendar. Trophies holds your shields and PR list. More has progress, nutrition and your account. Hurt? Use Injured? Skip so your coach knows.",
-  a:()=>`<div class="tm row nav">${[["bolt","Today"],["cal","Season"],["cup","Trophies"],["dots","More"]].map(x=>`<span>${I[x[0]]}<small>${x[1]}</small></span>`).join("")}</div>`}];
+ {k:"Step 6",t:"Everything else",p:"Season is your calendar. Trophies holds your shields and PR list. History has every set you've logged. More has progress, nutrition and your account. Hurt? Use Injured? Skip so your coach knows.",
+  a:()=>`<div class="tm row nav">${[["bolt","Today"],["cal","Season"],["hist","History"],["cup","Trophies"],["dots","More"]].map(x=>`<span>${I[x[0]]}<small>${x[1]}</small></span>`).join("")}</div>`}];
 function tutorialHTML(){const s=TUT[tutI],last=tutI===TUT.length-1;
   return `<div class="tut"><div class="ttop"><img src="${LOGO_CU}" alt="Cleary Cougars"><button class="tskip" data-tut="skip">Skip tutorial</button></div>
    <div class="tart" aria-hidden="true">${s.a()}</div>
@@ -1838,8 +1910,8 @@ document.addEventListener("click",e=>{const t=e.target.closest("[data-auth]");if
 
 function resetSection(which){const r=rec(ph,wk,day),k=K(ph,wk,day);
   if(which==="wu")r.u={};
-  else if(which==="day"){r.s={};r.u={};r.n={};r.c={};r.x={}}
-  else{const pre=which+".";Object.keys(r.x).forEach(x=>{if(x.startsWith("i"+pre))delete r.x[x]});["s","n","c"].forEach(f=>Object.keys(r[f]).forEach(x=>{if(x.startsWith(pre))delete r[f][x]}));delete r.x["r"+which]}
+  else if(which==="day"){r.s={};r.u={};r.n={};r.c={};r.x={};r.v={}}
+  else{const pre=which+".";Object.keys(r.x).forEach(x=>{if(x.startsWith("i"+pre))delete r.x[x]});["s","n","c","v"].forEach(f=>Object.keys(r[f]||{}).forEach(x=>{if(x.startsWith(pre))delete r[f][x]}));delete r.x["r"+which]}
   save(k);const y=scrollY;render();scrollTo(0,y);
   toast(which==="day"?"Day cleared":which==="wu"?"Warm-up cleared":"Block "+LET[+which]+" cleared")}
 function toast(t){let el=document.getElementById("toast");if(!el){el=document.createElement("div");el.id="toast";el.style.cssText="position:fixed;left:50%;top:calc(130px + env(safe-area-inset-top));transform:translateX(-50%);background:var(--red);color:#fff;padding:8px 14px;border-radius:10px;font:600 13px Barlow,system-ui,sans-serif;z-index:90;transition:opacity .3s";document.body.appendChild(el)}
@@ -1874,13 +1946,13 @@ function fly(el,html,cls){if(noFx()||!el)return;const b=el.getBoundingClientRect
 const nrm=s=>String(s).toLowerCase().replace(/[^a-z0-9]/g,"");
 const NAMEIDX={};PH.forEach((Q,p)=>Q.days.forEach((D,di)=>Q.prog[D.k].forEach((b,bi)=>b.ex.forEach((e,ei)=>{if(e.weeks.some(W=>W&&W.wt))(NAMEIDX[nrm(e.name)]=NAMEIDX[nrm(e.name)]||[]).push({p,di,d:D.k,bi,ei,name:e.name})}))));
 const ord=(p,w,di)=>p*10000+w*10+di;
-function bestBefore(e,p,w,d){const di=PH[p].days.findIndex(D=>D.k===d),lim=ord(p,w,di);let best=0;
-  (NAMEIDX[nrm(e.name)]||[]).forEach(L=>PH[L.p].weeks.forEach((_,wi)=>{if(ord(L.p,wi,L.di)<lim){const t=topSet(L.p,wi,L.d,L.bi,L.ei);if(t>best)best=t}}));return best}
+function bestBefore(e,p,w,d,cv){const di=PH[p].days.findIndex(D=>D.k===d),lim=ord(p,w,di);let best=0;
+  (NAMEIDX[nrm(e.name)]||[]).forEach(L=>PH[L.p].weeks.forEach((_,wi)=>{if(ord(L.p,wi,L.di)<lim&&sameVar(cv,varAt(L.p,wi,L.d,L.bi,L.ei))){const t=topSet(L.p,wi,L.d,L.bi,L.ei);if(t>best)best=t}}));return best}
 function exState(bi,ei,p,w,d){if(p===undefined){p=ph;w=wk;d=day}const e=PH[p].prog[d][bi].ex[ei],W=Wk(e,w),r=peek(p,w,d)||{s:{},c:{}};
-  if(!W)return{done:false,tier:0,diff:0,pr:false,top:0,topRow:-1};
+  if(!W)return{done:false,tier:0,diff:0,pr:false,top:0,topRow:-1};const cv=varAt(p,w,d,bi,ei);
   let top=0,topRow=-1,diff=0;rows(W).forEach((R,si)=>{if(R.warm)return;const v=r.s&&r.s[bi+"."+ei+"."+si];if(!v||!v.d||!(+v.w>0))return;if(+v.w>top){top=+v.w;topRow=si}
-    for(let x=w-1;x>=0;x--){const q=peek(p,x,d),pv=q&&q.s&&q.s[bi+"."+ei+"."+si];if(pv&&+pv.w>0){if(+v.w-+pv.w>diff)diff=+v.w-+pv.w;break}}});
-  const before=W.wt&&top?bestBefore(e,p,w,d):0;
+    for(let x=w-1;x>=0;x--){const q=peek(p,x,d),pv=q&&q.s&&q.s[bi+"."+ei+"."+si];if(pv&&+pv.w>0){if(sameVar(cv,varAt(p,x,d,bi,ei))&&+v.w-+pv.w>diff)diff=+v.w-+pv.w;break}}});
+  const before=W.wt&&top?bestBefore(e,p,w,d,cv):0;
   return{done:exGot(r,W,bi+"."+ei)>=need(W),top,topRow,diff,tier:diff>=15?3:diff>=10?2:diff>=5?1:0,pr:before>0&&top>before,before}}
 const SHC=[null,["#E9AE7A","#8A4B1F","#3B1E08","Bronze"],["#F4F6F9","#8C97A6","#27303D","Silver"],["#FFE78F","#D49B12","#4A3200","Gold"]];
 function shieldHTML(tier,diff,big){const c=SHC[tier];if(!c)return "";const id="sg"+tier;
@@ -1934,13 +2006,6 @@ const locked=()=>false,lockMsg=()=>"";
 function shoutsHTML(){return (CFG.sh||[]).filter(s=>!s.seen).map(s=>`<div class="shout"><div class="se">${esc(s.emo)}</div><div class="st"><b>${esc(s.from)}</b> on ${esc(s.where)}<p>${esc(s.text)}</p></div><button data-shx="${esc(s.id)}" aria-label="Dismiss">Got it</button></div>`).join("")}
 
 /* ---- personal record wall ---- */
-function records(){const out=[];Object.keys(NAMEIDX).forEach(key=>{const L=NAMEIDX[key],hits=[];
-  L.forEach(x=>PH[x.p].weeks.forEach((_,w)=>{const t=topSet(x.p,w,x.d,x.bi,x.ei);if(t)hits.push({o:ord(x.p,w,x.di),t,p:x.p,w,d:x.d,bi:x.bi,ei:x.ei})}));
-  if(!hits.length)return;hits.sort((a,b)=>a.o-b.o);let best=hits[0],raised=0;hits.forEach((h,i)=>{if(i&&h.t>best.t){best=h;raised++}});
-  const r=peek(best.p,best.w,best.d);let when="";Object.keys(r.s||{}).forEach(k=>{if(k.startsWith(best.bi+"."+best.ei+".")&&+r.s[k].w===best.t&&r.s[k].t)when=r.s[k].t});
-  const dt=when?pd(when):dayDate(best.p,best.w,best.d)||pd(PH[best.p].weeks[best.w].mon);
-  out.push({name:L[0].name,w:best.t,first:hits[0].t,raised,dt,ph:PH[best.p].n,wk:PH[best.p].weeks[best.w].n,o:best.o})});
-  return out.sort((a,b)=>b.o-a.o)}
 function wallHTML(list,demo){const R=list||records();
   return `
    
@@ -1967,6 +2032,9 @@ function guideHTML(){const S=(id,l,t,body)=>`<section class="card" id="g-${id}">
      <li>Inside a block you see <b>one set at a time</b>. The navy card at the top shows how the block runs. In a <b>superset</b> it draws the loop: B1, then B2, then rest, then back to B1, and tells you which round you're on. The numbered buttons are that exercise's sets: <b>W</b> is a warm-up, red is the set you're on, turquoise is done. Tap any of them to jump to it.</li>
      <li>The left box says <b>what to do</b> (reps, or how long to hold). The right box is the <b>weight</b>, filled in for you at last week plus 5. Tap <b>−5</b> or <b>+5</b>, or tap the number and type your own.</li>
      <li>If the target is a range or a rep max, a <b>reps</b> box appears. Put in what you actually got.</li>
+     <li><b>Exercises with options</b> (barbell or DB, row choice, lunge choice…) show <b>What did you do?</b> buttons. Pick the one you did. Your last pick is used until you change it, and barbell and DB numbers are tracked separately.</li>
+     <li><b>Note for this set:</b> tap a quick tag (like <b>External</b> or <b>Internal</b>) or type your own. Each set gets its own note, so set 1 can say Internal and set 2 External. Sets with a note get a dot.</li>
+     <li><b>Your history on this lift</b> sits under the set card: your last 3 times on it with every set and note. Tap <b>All sessions</b> for the full list and a chart.</li>
      <li>Hit <b>Done</b>. The app moves you to the next set. In a superset it sends you to the other exercise, the way the block is meant to be run.</li>
      <li>The <b>B1 / B2</b> buttons switch between exercises in the block yourself.</li>
      <li><b>Hurt?</b> Tap <b>Injured? Skip</b> under the Done button to skip one exercise, or <b>Injured? Skip this whole lift</b> at the bottom of the lineup. It marks it off without logging sets, your coach can see it, and you can undo it.</li>
@@ -1988,6 +2056,7 @@ function guideHTML(){const S=(id,l,t,body)=>`<section class="card" id="g-${id}">
      row(`<span style="font-size:26px">📊</span>`,`<b>Week recap:</b> finish the last lift of the week and you get the week's totals and your biggest jump.`)+
      row(`<span style="font-size:26px">🏆</span>`,`<b>Phase trophy:</b> finish every lift in a phase to light up its trophy. There are 10.`))}
    ${S("track","6","Tracking progress",`<ul>
+     <li><b>History</b> (bottom bar): every workout you've logged, newest first, with weights, reps, options and notes. Switch to <b>By lift</b> to search any exercise and see every time you did it, with a chart.</li>
      <li><b>Trophies:</b> your phase trophies, every shield you've earned, and your <b>PR list</b> with dates.</li>
      <li><b>More › Progress:</b> a line plot of the pounds you moved each week, and one of your top set on every weighted lift in the phase.</li>
      <li><b>Season:</b> a monthly calendar. Red days are lifts and turquoise days are done. Tap a day to open that lift. In phases where you pick your own days, the week shows Day 1 / Day 2 / Day 3 buttons instead.</li>
@@ -1996,7 +2065,7 @@ function guideHTML(){const S=(id,l,t,body)=>`<section class="card" id="g-${id}">
    ${S("settings","7","Settings & saving",`<ul>
      <li><b>More › Settings:</b> dark mode, auto rest timer, mute, and reduce effects (no floating emoji or confetti; badges still show).</li>
      <li><b>More › Abbreviation key:</b> every abbreviation and the RPE scale.</li>
-     <li><b>Coaches</b> get a <b>Coach's view</b> under More: everyone's week at a glance and the list of who has signed up.</li>
+     <li><b>Coaches</b> get a <b>Coach's view</b> under More: team completion by week, who needs a look, a week-by-week grid, PRs and biggest gains, a sortable player list, lift leaderboards, and each player's own page (body weight, lifts, recent workouts with notes).</li>
      <li><b>Quote of the week</b> sits at the top of Today. Coaches can hit <b>Shuffle quote</b> in Coach's view to swap it for the whole team. The <b>Quotes</b> tab there lists all 50 with their sources; tap <b>Out</b> to pull any you don't want.</li>
      <li><b>Saving is automatic.</b> There's no save button. Close the app whenever; your numbers are there when you come back.</li></ul>`)}
    <div class="foot">Questions about the training itself? Check Coach's notes or ask your coach.</div>`}
@@ -2032,7 +2101,7 @@ function testAct(t,el){
   if(t==="wintro"){showWin(Object.assign({},base,{sub:"Phase 4 · Week 14 · Thursday",trophy:"Phase 4 complete — trophy added to your Season tab"}));return}
   if(t==="shout"){CFG.sh=(CFG.sh||[]).filter(s=>!s.demo);CFG.sh.push({id:"demo"+Date.now(),demo:1,from:"Beck",emo:"🔥",where:"Front Squat · Phase 4, Wk 12",text:"185 for 3. That's a grown man squat. Keep stacking."});local();go("today");toast("Sample shout-out added to the Today screen");return}
   if(t==="rest"){startTimer([["Rest",20]],null,true);return}
-  if(t==="team"){demoTeam(!TEAM.demo);if(TEAM.demo){cview="overview";go("coach")}else{const y=scrollY;render();scrollTo(0,y)}return}
+  if(t==="team"){demoTeam(!TEAM.demo);if(TEAM.demo){cview="team";go("coach")}else{const y=scrollY;render();scrollTo(0,y)}return}
   if(t==="lock"){TM.lock=TM.lock?0:1;const y=scrollY;render();scrollTo(0,y);return}
   if(t==="unlock"){CFG.unlock=CFG.unlock?0:1;save("cfg");const y=scrollY;render();scrollTo(0,y);return}
   if(t==="wall"){const d=n=>addD(new Date(2026,10,16),n);view="walldemo";$("#nav").innerHTML=navHTML();$("#main").innerHTML=topbar("My records","Sample data","test")+`<div class="legacy">`+wallHTML([
@@ -2053,6 +2122,330 @@ function testAct(t,el){
 
 function drawSettings(){const row=(f,on,t,d)=>`<button class="setsw ${on?"on":""}" data-set="${f}"><span><b>${t}</b><small>${d}</small></span><i></i></button>`;
   $("#setbody").innerHTML=row("dark",!!CFG.dark,"Dark mode","Navy background instead of the light one")+row("ar",CFG.ar!==0,"Auto rest timer","Starts the block's rest clock when you finish a round")+row("mute",!!CFG.mute,"Mute","No timer beep or vibration. Set reactions never make sound.")+row("fx",noFx(),"Reduce effects","No floating emoji or confetti. Stamps and badges still show.")}
+
+/* ======================= v3: OPTION PICKER · SET NOTES · HISTORY · COACH ANALYTICS ======================= */
+const EXIDX={};PH.forEach((Q,p)=>Q.days.forEach((D,di)=>Q.prog[D.k].forEach((b,bi)=>b.ex.forEach((e,ei)=>{(EXIDX[nrm(e.name)]=EXIDX[nrm(e.name)]||[]).push({p,di,d:D.k,bi,ei,name:e.name,e})}))));
+const ALLW=[];PH.forEach((Q,p)=>Q.weeks.forEach((W,w)=>ALLW.push({p,w,n:W.n,mon:W.mon})));
+const gIdx=(p,w)=>ALLW.findIndex(x=>x.p===p&&x.w===w);
+const gOf=s=>{const t=pd(s);let g=0;ALLW.forEach((x,i)=>{if(pd(x.mon)<=t)g=i});return g};
+const totW=g=>{const x=ALLW[g];return PH[x.p].days.filter(D=>!skipMsg(x.p,x.w,D.k)).length};
+const dsince=s=>{if(!s)return null;const t=new Date();t.setHours(0,0,0,0);return Math.round((t-pd(s))/864e5)};
+const cap1=s=>s.charAt(0).toUpperCase()+s.slice(1);
+const pct=x=>x==null?"—":Math.round(x*100)+"%";
+
+/* ---- which exercises have options to pick from ---- */
+const VAR_OVR={
+ dborbarbellbenchpress:["Barbell","Dumbbell"],bbsafetybarfwdsteplunge:["Barbell","Safety bar"],barbelldbrfesplitsquat:["Barbell","Dumbbell"],
+ rfesplitsquatchoice:["Dumbbell","BB front rack"],frontsquatortrapbardeadlift:["Front Squat","Trap Bar Deadlift"],
+ skatersquatorrfesplitsquat:["Skater · Goblet","Skater · 2-DB","RFE · 2-DB","RFE · BB / Safety bar"],trxorbarbellinvertedrow:["TRX","Barbell"],
+ sideplankwcableorbandrow:["Cable","Band"],bandcablepallofrotations:["Band","Cable"],"12kneelingsacablebandlatpulldown":["Cable","Band"],
+ widegripchestsupprow:["Chest supported row","Cable row"],"12kneelsalandminepress":["Landmine","DB overhead press"],ropebandtricepsextensions:["Rope","Band"],
+ variablegripchinpullups:["Chin-ups (underhand)","Pull-ups (overhand)","Neutral grip","Mixed grips","Lat pulldown"],
+ slpistonsquatjumps:["Bodyweight","Weighted vest","2 DBs"],kneelingtrxfallouts:["TRX","Ab wheel","Barbell rollout"],
+ nasalonlycardioyourchoice:["Bike","Incline treadmill · forward","Incline treadmill · backward"],
+ underhanduhchinups:["Bodyweight","Weighted","Band assisted","U.H. lat pulldown"],hangingabskneeraises:["Hanging","Iso hold","Foam roller rev. crunches"],
+ trxinvertedrow:["TRX","Barbell"],chestsupporteddbrows:["DB","Machine"],dbchestsupportedrows:["DB","Machine"],
+ underhandlatpulldown:["Machine","Cable"],widegriplatpulldownmachine:["Machine","Cable"]};
+function variantsOf(e){if(e._vo!==undefined)return e._vo;let o=VAR_OVR[nrm(e.name)]||null;
+  if(!o&&e.opts){const L=e.opts.filter(([a])=>/^\s*([A-D]\)|OPTION \d+:)\s*$/i.test(a));
+    if(L.length>1)o=L.map(([,t])=>t.split(/\s+[—×]\s+/)[0].trim());
+    else{const M=e.opts.filter(([a])=>/too hard|too easy|if needed|too difficult|if unable|optional/i.test(a));
+      if(M.length){o=["As written"];M.forEach(([,t])=>t.split(/\s+\(or\)\s+/i).forEach(x=>{x=cap1(x.trim());if(x&&x.length<=42&&!o.includes(x))o.push(x)}))}}}
+  if(!o&&/\s\(or\)\s/i.test(e.name))o=e.name.split(/\s+\(or\)\s+/i).map(s=>s.trim());
+  return e._vo=o&&o.length>1?o:null}
+const varAt=(p,w,d,bi,ei)=>{const r=peek(p,w,d);return (r&&r.v&&r.v[bi+"."+ei])||""};
+const sameVar=(a,b)=>!a||!b||a===b;
+function lastVariant(e,p,w,d){const di=PH[p].days.findIndex(D=>D.k===d),lim=ord(p,w,di);let best=null;
+  (EXIDX[nrm(e.name)]||[]).forEach(L=>PH[L.p].weeks.forEach((_,wi)=>{const o=ord(L.p,wi,L.di);if(o<lim&&(!best||o>best.o)){const v=varAt(L.p,wi,L.d,L.bi,L.ei);if(v)best={o,v}}}));return best?best.v:""}
+function curVariant(bi,ei){const r=peek(ph,wk,day),v=r&&r.v&&r.v[bi+"."+ei];if(v)return{v,auto:false};const e=P().prog[day][bi].ex[ei];if(!variantsOf(e))return{v:"",auto:false};const lv=lastVariant(e,ph,wk,day);return{v:lv,auto:!!lv}}
+function varPickHTML(bi,ei,e){const o=variantsOf(e);if(!o)return "";const cv=curVariant(bi,ei);
+  return `<div class="vpick"><div class="vph"><b>What did you do?</b><span>${cv.v?(cv.auto?"Same as last time · tap to change":"Saved with this lift"):"Pick one so your numbers compare right"}</span></div>
+   <div class="vpc">${o.map(x=>`<button class="${x===cv.v?"on":""} ${x===cv.v&&cv.auto?"auto":""}" data-var="${bi}.${ei}|${esc(x)}">${esc(x)}</button>`).join("")}</div></div>`}
+
+/* ---- notes on each set ---- */
+function noteTags(e){const n=e.name,t=[];
+  if(/rotation|rotations|\bER\b|\bIR\b/i.test(n)&&/ext|int|shoulder|band|cable/i.test(n))t.push("External","Internal");
+  if(/grip|chin|pull ?ups?|pulldown|pull aparts/i.test(n))t.push("Underhand","Overhand","Neutral");
+  (EXIDX[nrm(n)]||[]).forEach(x=>PH[x.p].weeks.forEach((_,w)=>{const r=peek(x.p,w,x.d);if(!r||!r.s)return;Object.keys(r.s).forEach(k=>{if(!k.startsWith(x.bi+"."+x.ei+"."))return;const nt=(r.s[k].nt||"").trim();
+    nt.split(/\s*,\s*/).forEach(p=>{if(p&&p.length<=24&&!t.some(q=>q.toLowerCase()===p.toLowerCase()))t.push(p)})})}));
+  ["Paused","Felt easy","Grinder","Form broke down"].forEach(x=>{if(!t.some(q=>q.toLowerCase()===x.toLowerCase()))t.push(x)});return t.slice(0,9)}
+function setNoteHTML(k,e,v){const nt=v.nt||"",has=x=>nt.split(/\s*,\s*/).some(p=>p.toLowerCase()===x.toLowerCase());
+  return `<div class="snote"><div class="snh"><b>Note for this set</b><span>optional · coaches can see it</span></div>
+   <div class="snc">${noteTags(e).map(x=>`<button class="${has(x)?"on":""}" data-snt="${k}|${esc(x)}">${esc(x)}</button>`).join("")}</div>
+   <input class="sni" data-sn="${k}" value="${esc(nt)}" placeholder="Type your own: internal, 3-sec pause, felt tight…" maxlength="80"></div>`}
+
+/* ---- reading back what was logged ---- */
+function sessDate(p,w,d){const r=peek(p,w,d);let when="";Object.values((r&&r.s)||{}).forEach(v=>{if(v.d&&v.t&&(!when||v.t<when))when=v.t});return when?pd(when):(dayDate(p,w,d)||pd(PH[p].weeks[w].mon))}
+function sessionLite(p,w,d){const r=peek(p,w,d)||{s:{}};let sets=0,lb=0;PH[p].prog[d].forEach((b,bi)=>b.ex.forEach((e,ei)=>{const W=Wk(e,w);if(!W)return;rows(W).forEach((R,si)=>{const v=r.s&&r.s[bi+"."+ei+"."+si];if(!v||!v.d)return;sets++;
+  if(+v.w>0){const n=parseInt(v.r)||String(R.t).replace(/^x/,"").split(/[-,+ ]/).map(x=>parseInt(x)).filter(x=>x>0).slice(0,/,/.test(R.t)?9:1).reduce((a,x)=>a+x,0)||1;lb+=+v.w*(/sec/.test(R.t)?1:n)}})}));return{sets,lb}}
+function exLog(p,w,d,bi,ei){const r=peek(p,w,d),e=PH[p].prog[d][bi].ex[ei],W=Wk(e,w);if(!r||!W)return null;const sets=[];
+  rows(W).forEach((R,si)=>{const v=r.s&&r.s[bi+"."+ei+"."+si];if(v&&(v.d||v.nt))sets.push({lab:R.lab,warm:!!R.warm,t:R.t,w:v.w||"",r:v.r||"",nt:v.nt||"",d:!!v.d})});
+  const note=(r.n&&r.n[bi+"."+ei])||"",inj=!!(r.x&&(r.x.inj||r.x["i"+bi+"."+ei])),cnt=W.count&&r.c&&r.c[bi+"."+ei];
+  if(!sets.some(s=>s.d)&&!note&&!inj&&!cnt)return null;
+  return{p,w,d,bi,ei,e,W,sets,note,inj,cnt:cnt||0,v:varAt(p,w,d,bi,ei),top:topSet(p,w,d,bi,ei)}}
+function setTxt(s){const Pt=parseT(s.t),reps=s.r||(Pt.raw?"":Pt.big),lab=(Pt.big+(Pt.small&&!/each/.test(Pt.small)?" "+Pt.small:/each/.test(Pt.small)?" ea":"")).trim();return (s.warm?"WU ":"")+(+s.w>0?s.w+(reps?" × "+reps:""):(s.r||lab))+(s.d?"":" · not done")}
+function sessLogs(p,w,d){const out=[];PH[p].prog[d].forEach((b,bi)=>b.ex.forEach((e,ei)=>{const L=exLog(p,w,d,bi,ei);if(L)out.push(L)}));return out}
+function allSessions(){const out=[];PH.forEach((Q,p)=>Q.weeks.forEach((W,w)=>Q.days.forEach((D,di)=>{const r=peek(p,w,D.k);if(!r)return;const S=sessionLite(p,w,D.k),inj=!!(r.x&&r.x.inj);if(!S.sets&&!inj)return;
+  out.push(Object.assign({p,w,d:D.k,di,o:ord(p,w,di),dt:sessDate(p,w,D.k),inj},S))})));return out.sort((a,b)=>b.o-a.o)}
+function liftHist(key,skipCur){const out=[];(EXIDX[key]||[]).forEach(x=>PH[x.p].weeks.forEach((_,w)=>{if(skipCur&&x.p===ph&&w===wk&&x.d===day)return;const L=exLog(x.p,w,x.d,x.bi,x.ei);if(L){L.o=ord(x.p,w,x.di);L.dt=sessDate(x.p,w,x.d);out.push(L)}}));return out.sort((a,b)=>b.o-a.o)}
+function exLogHTML(L,o){o=o||{};const Q=PH[L.p];
+  const head=o.name?`<div class="hxh"><b>${esc(LET[L.bi]+(L.ei+1))} · ${esc(L.e.name)}</b>${L.v?`<span class="hvar">${esc(L.v)}</span>`:""}</div>`
+    :`<div class="hxh"><b>${nice(L.dt)}</b><small>Phase ${Q.n} · Wk ${Q.weeks[L.w].n} · ${esc(Q.days.find(D=>D.k===L.d).s)}</small>${L.v?`<span class="hvar">${esc(L.v)}</span>`:""}</div>`;
+  const S=L.sets.filter(s=>s.d||s.nt);
+  return `<div class="hx">${head}${L.inj?`<span class="hinj">Skipped · injury</span>`:""}${L.cnt?`<span class="hs"><b>${esc(L.cnt)} done</b></span>`:""}
+   ${S.length?`<div class="hsets">${S.map(s=>`<span class="hs ${s.warm?"wu":""} ${s.d?"":"nd"}"><b>${esc(setTxt(s))}</b>${s.nt?`<em>${esc(s.nt)}</em>`:""}</span>`).join("")}</div>`:""}
+   ${L.note?`<p class="hnote">“${esc(L.note)}”</p>`:""}</div>`}
+function liftHistCard(e){const key=nrm(e.name),H=liftHist(key,true);
+  if(!H.length)return `<div class="histc"><div class="hch"><b>Your history on this lift</b><span>First time · nothing logged before today</span></div></div>`;
+  const best=Math.max(0,...H.map(L=>L.top));
+  return `<details class="histc" open><summary class="hch"><b>Your history on this lift</b><span>${H.length} session${H.length>1?"s":""}${best?` · best ${best} lb`:""}</span></summary>
+    ${H.slice(0,3).map(L=>exLogHTML(L)).join("")}<button class="hall" data-hl="${esc(key)}">${H.length>1?"All "+H.length+" sessions":"Open"} + chart ${I.fwd}</button></details>`}
+
+/* ---- small charts ---- */
+function spark(vals,w,h){w=w||92;h=h||28;const has=vals.filter(v=>v>0);if(has.length<2)return "";const lo=Math.min(...has),hi=Math.max(...has),r=hi-lo||1,n=vals.length;
+  let d="",pv=false;vals.forEach((v,i)=>{if(!(v>0)){pv=false;return}const x=(n===1?w/2:3+(w-6)*i/(n-1)).toFixed(1),y=(3+(h-6)*(1-(v-lo)/r)).toFixed(1);d+=(pv?"L":"M")+x+" "+y;pv=true});
+  const lx=3+(w-6),ly=3+(h-6)*(1-(vals[n-1]-lo)/r);
+  return `<svg class="spark" viewBox="0 0 ${w} ${h}" width="${w}" height="${h}" aria-hidden="true"><path d="${d}"/>${vals[n-1]>0?`<circle cx="${lx.toFixed(1)}" cy="${ly.toFixed(1)}" r="3"/>`:""}</svg>`}
+function barsSvg(vals,labels,curI,o){o=o||{};const W=330,H=o.h||150,T=22,B=22,L=6,R=6,n=vals.length;if(!n)return "";const mx=o.max||Math.max(1,...vals.map(v=>v||0)),bw=(W-L-R)/n;
+  const fm=o.fmt||(v=>Math.round(v));
+  return `<svg class="bars" viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(o.label||"Chart")}">
+    <line class="pg" x1="${L}" x2="${W-R}" y1="${H-B}" y2="${H-B}"/>
+    ${vals.map((v,i)=>{const x=L+bw*i+bw*.15,bh=v==null?0:(H-T-B)*Math.max(0,v)/mx,y=H-B-bh,show=n<=14||i%Math.ceil(n/12)===0||i===n-1;
+      return `${v==null?`<rect class="bnull" x="${x.toFixed(1)}" y="${(H-B-3).toFixed(1)}" width="${(bw*.7).toFixed(1)}" height="3" rx="1.5"/>`:`<rect class="${i===curI?"bcur":"b"}" x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${(bw*.7).toFixed(1)}" height="${Math.max(bh,2).toFixed(1)}" rx="3"/>`}
+       ${v!=null&&(n<=10||i===curI||i===n-1)?`<text class="bv" x="${(x+bw*.35).toFixed(1)}" y="${(y-5).toFixed(1)}" text-anchor="middle">${esc(fm(v))}</text>`:""}
+       ${show?`<text class="px" x="${(x+bw*.35).toFixed(1)}" y="${H-6}" text-anchor="middle">${esc(labels[i])}</text>`:""}`}).join("")}</svg>`}
+
+/* ======================= HISTORY (player) ======================= */
+let HV="sessions",HSEL=null,HVAR="";
+function historyHTML(){const S=allSessions();
+  let h=topbar("History","Every set you've logged","today")+`<div class="body"><div class="seg"><button class="${HV==="sessions"?"on":""}" data-hv="sessions">By day · ${S.length}</button><button class="${HV==="lifts"?"on":""}" data-hv="lifts">By lift</button></div>`;
+  if(HV==="sessions"){
+    if(!S.length)h+=`<div class="gcard"><h2>Nothing yet</h2><p class="gp">Once you log a set, every workout shows up here with your weights, reps and notes.</p></div>`;
+    let lastWk="";
+    S.forEach((x,i)=>{const Q=PH[x.p],D=Q.days.find(z=>z.k===x.d),wl="Phase "+Q.n+" · Week "+Q.weeks[x.w].n;
+      if(wl!==lastWk){h+=`<div class="hwk">${esc(wl)} <span>${weekRange(x.p,x.w)}</span></div>`;lastWk=wl}
+      const L=sessLogs(x.p,x.w,x.d),pc=dayPct(x.p,x.w,x.d);
+      h+=`<details class="hsess" ${i===0?"open":""}><summary><span class="hdate"><b>${MON[x.dt.getMonth()]}</b><i>${x.dt.getDate()}</i></span><span class="hst"><b>${esc(D.l)}${D.sub?` · ${esc(D.sub)}`:""}</b><small>${x.inj?"Skipped for injury":`${x.sets} sets · ${x.lb?Math.round(x.lb).toLocaleString()+" lb":"bodyweight"} · ${pc>=.999?"complete":Math.round((pc||0)*100)+"% done"}`}</small></span></summary>
+        <div class="hbody">${L.map(z=>exLogHTML(z,{name:1})).join("")}<button class="hall" data-go="${x.p}|${x.w}|${x.d}">Open this workout ${I.fwd}</button></div></details>`});
+  }else{
+    const keys=Object.keys(EXIDX).map(k=>({k,H:liftHist(k)})).filter(x=>x.H.length);
+    keys.forEach(x=>{x.best=Math.max(0,...x.H.map(L=>L.top));x.last=x.H[0]});keys.sort((a,b)=>b.last.o-a.last.o);
+    h+=`<input class="hq" data-hq="1" placeholder="Search a lift (squat, bench, row…)" autocomplete="off">`;
+    if(!keys.length)h+=`<div class="gcard"><p class="gp">No lifts logged yet.</p></div>`;
+    h+=`<div class="gcard flush">${keys.map(x=>{const L=x.last,tops=x.H.slice(0,10).reverse().map(z=>z.top);
+      return `<button class="hlrow" data-hl="${esc(x.k)}" data-name="${esc(nrm(L.e.name)+" "+L.e.name.toLowerCase())}"><span class="hln"><b>${esc(L.e.name)}</b><small>${x.H.length} session${x.H.length>1?"s":""} · last ${nice(L.dt)}${x.best?` · best <strong>${x.best} lb</strong>`:""}</small></span>${spark(tops)}${I.fwd}</button>`}).join("")}</div>`}
+  return h+`</div>`}
+function histLiftHTML(){const key=HSEL,E=EXIDX[key];if(!E)return historyHTML();const name=E[0].name,all=liftHist(key);
+  const vs=[...new Set(all.map(L=>L.v).filter(Boolean))];if(HVAR&&!vs.includes(HVAR))HVAR="";
+  const H=HVAR?all.filter(L=>L.v===HVAR):all,pts=H.filter(L=>L.top).slice(0,12).reverse();
+  const best=Math.max(0,...H.map(L=>L.top)),first=pts.length?pts[0].top:0;
+  let h=topbar(name.length>22?"Lift history":name,name.length>22?name:H.length+" sessions logged","history")+`<div class="body">`;
+  if(vs.length>1)h+=`<div class="vpc solo"><button class="${HVAR?"":"on"}" data-hvar="">All</button>${vs.map(v=>`<button class="${HVAR===v?"on":""}" data-hvar="${esc(v)}">${esc(v)}</button>`).join("")}</div>`;
+  if(best)h+=`<div class="tiles t3"><div class="tl"><b>${best}</b><span>Best lb</span></div><div class="tl"><b>${pts.length?pts[pts.length-1].top:"—"}</b><span>Last top set</span></div><div class="tl navy"><b>${first&&best>first?"+"+(best-first):"0"}</b><span>lb since first</span></div></div>`;
+  if(pts.length>1)h+=`<div class="gcard"><div class="ghead"><h2>Top set</h2><span>${pts.length} sessions</span></div>${plot(pts.map(L=>L.top),pts.map(L=>"W"+PH[L.p].weeks[L.w].n),pts.length-1," lb")}</div>`;
+  h+=`<div class="gcard">${H.length?H.map(L=>exLogHTML(L)).join(""):`<p class="gp">Nothing logged${HVAR?" with "+esc(HVAR):""} yet.</p>`}</div>`;
+  return h+`</div>`}
+
+/* ======================= PRs + records, one line per option (barbell and DB numbers don't mix) ======================= */
+function liftGroups(key){const G={};(NAMEIDX[key]||[]).forEach(x=>PH[x.p].weeks.forEach((_,w)=>{const t=topSet(x.p,w,x.d,x.bi,x.ei);if(t){const v=varAt(x.p,w,x.d,x.bi,x.ei);(G[v]=G[v]||[]).push({o:ord(x.p,w,x.di),t,p:x.p,w,d:x.d,bi:x.bi,ei:x.ei,v})}}));
+  Object.values(G).forEach(a=>a.sort((x,y)=>x.o-y.o));return G}
+function whenHit(h){const r=peek(h.p,h.w,h.d);let when="";Object.keys((r&&r.s)||{}).forEach(k=>{if(k.startsWith(h.bi+"."+h.ei+".")&&+r.s[k].w===h.t&&r.s[k].t)when=r.s[k].t});return when?pd(when):dayDate(h.p,h.w,h.d)||pd(PH[h.p].weeks[h.w].mon)}
+function prEvents(){const out=[];Object.keys(NAMEIDX).forEach(key=>{const G=liftGroups(key),nm=NAMEIDX[key][0].name;
+  Object.keys(G).forEach(v=>{let best=0;G[v].forEach((h,i)=>{if(i&&h.t>best)out.push({name:nm+(v?" · "+v:""),w:h.t,prev:best,dt:whenHit(h),ph:PH[h.p].n,wk:PH[h.p].weeks[h.w].n,o:h.o});if(h.t>best)best=h.t})})});
+  return out.sort((a,b)=>b.o-a.o)}
+function records(){const out=[];Object.keys(NAMEIDX).forEach(key=>{const G=liftGroups(key),nm=NAMEIDX[key][0].name;
+  Object.keys(G).forEach(v=>{const hits=G[v];let best=hits[0],raised=0;hits.forEach((h,i)=>{if(i&&h.t>best.t){best=h;raised++}});
+    out.push({name:nm+(v?" · "+v:""),w:best.t,first:hits[0].t,raised,dt:whenHit(best),ph:PH[best.p].n,wk:PH[best.p].weeks[best.w].n,o:best.o})})});
+  return out.sort((a,b)=>b.o-a.o)}
+
+/* ======================= SUMMARY a player sends to the coaches ======================= */
+function nutNow(){const t=new Date(),k="nut-"+t.getFullYear()+"-"+String(t.getMonth()+1).padStart(2,"0"),r=LOG[k];if(!r||!r.d)return null;
+  const ds=Object.values(r.d).filter(v=>v.c||v.f||v.p),n=ds.length;if(!n)return null;const avg=f=>Math.round(ds.reduce((s,v)=>s+(+v[f]||0),0)/n);
+  return{n,cal:Math.round(ds.reduce((s,v)=>s+calc(v.c,v.f,v.p),0)/n),p:avg("p"),c:avg("c"),f:avg("f")}}
+function weighIns(){const out=[];Object.keys(LOG).filter(k=>/^nut-\d{4}-\d{2}$/.test(k)).sort().forEach(k=>{const d=LOG[k].d||{};Object.keys(d).map(Number).sort((a,b)=>a-b).forEach(x=>{if(+d[x].w>0)out.push([k.slice(4)+"-"+String(x).padStart(2,"0"),+d[x].w])})});return out}
+function mySummary(){const T=findToday(),R=weekRecap(T.p,T.w),t=tally(),gi=gIdx(T.p,T.w);let sessions=0,last="";PH.forEach((_,p)=>sessions+=phaseSessions(p).done);
+  Object.keys(LOG).forEach(k=>{if(!/^p\d+-w\d-d\d$/.test(k))return;Object.values(LOG[k].s||{}).forEach(v=>{if(v.d&&v.t&&v.t>last)last=v.t})});
+  const M=CFG.me||{},E=prEvents(),mon=pd(ALLW[gi].mon),wkEnd=addD(mon,7);
+  const wkh=ALLW.slice(0,gi+1).map(x=>{let d=0,sets=0,lb=0;PH[x.p].days.forEach(D=>{const pc=dayPct(x.p,x.w,D.k);if(pc==null)return;if(pc>=.999)d++;const S=sessionLite(x.p,x.w,D.k);sets+=S.sets;lb+=S.lb});return[d,Math.round(lb),sets]});
+  const lifts=[];Object.keys(NAMEIDX).forEach(key=>{const pts=[];NAMEIDX[key].forEach(x=>PH[x.p].weeks.forEach((W,w)=>{const tp=topSet(x.p,w,x.d,x.bi,x.ei);if(tp)pts.push([ord(x.p,w,x.di),W.n,tp,varAt(x.p,w,x.d,x.bi,x.ei),iso(sessDate(x.p,w,x.d))])}));
+    if(!pts.length)return;pts.sort((a,b)=>a[0]-b[0]);const main=NAMEIDX[key].some(x=>PH[x.p].prog[x.d][x.bi].ex[x.ei].weeks.some(W=>W&&(W.wu||W.main)));
+    lifts.push({k:key,n:NAMEIDX[key][0].name,m:main?1:0,h:pts.slice(-14).map(q=>[q[1],q[2],q[3],q[4]])})});
+  lifts.sort((a,b)=>b.m-a.m||b.h.length-a.h.length);lifts.splice(28);
+  const sess=allSessions().slice(0,8).map(S=>({dt:iso(S.dt),ph:PH[S.p].n,wk:PH[S.p].weeks[S.w].n,dl:PH[S.p].days.find(D=>D.k===S.d).l,sets:S.sets,lb:Math.round(S.lb),inj:S.inj?1:0,
+    ex:sessLogs(S.p,S.w,S.d).map(L=>[LET[L.bi]+(L.ei+1)+" "+L.e.name,L.v,L.sets.filter(s=>s.d||s.nt).map(s=>setTxt(s)+(s.nt?" ("+s.nt+")":"")).join(", ")+(L.cnt?L.cnt+" done":""),L.note,L.inj?1:0])}));
+  return{v:2,pos:M.pos||"",ht:M.ht||"",sw:M.sw||"",gw:M.gw||"",bw:CFG.bw||"",ph:PH[T.p].n,wk:PH[T.p].weeks[T.w].n,wd:R.done,wt:R.tot,sessions,prs:t.prs,tiers:t.tiers,trophies:t.trophies,last,inj:injList(T.p,T.w),
+    prw:E.filter(x=>x.dt>=mon&&x.dt<wkEnd).length,recent:E.slice(0,6).map(x=>({n:x.name,w:x.w,p:x.prev,d:nice(x.dt),iso:iso(x.dt)})),
+    wkh,lifts,sess,bwh:weighIns().slice(-14),nut:nutNow()}}
+
+/* ======================= COACH'S VIEW: analytics ======================= */
+let cpos="all",csort="att",clift="",cmet="best",CP=null;
+const cRole=i=>ME&&i===ME.id&&(ME.owner||ME.coach)?"head":TEAM.roles[i]==="coach"?"coach":"player";
+const cName=i=>{const R=TEAM.roster[i]||{};return ((R.fn||"")+" "+(R.ln||"")).trim()||TEAM.names[i]||"Player "+String(i).slice(-4)};
+const initials=n=>n.split(/\s+/).map(x=>x[0]).slice(0,2).join("").toUpperCase();
+function expectedNow(){const T=findToday();if(T.pre||T.post)return 0;const Q=PH[T.p],t=new Date();t.setHours(0,0,0,0);let n=0,flex=false;
+  const ok=Q.days.filter(D=>!skipMsg(T.p,T.w,D.k));ok.forEach(D=>{const dt=dayDate(T.p,T.w,D.k);if(dt){if(dt<t)n++}else flex=true});
+  if(flex){const dow=(t.getDay()+6)%7;n=Math.min(ok.length,Math.floor(dow/7*ok.length))}return n}
+function cDerive(i){const T=findToday(),gi=gIdx(T.p,T.w),wkN=PH[T.p].weeks[T.w].n,s=TEAM.sums[i]||{},R=TEAM.roster[i]||{};
+  const v2=Array.isArray(s.wkh),cur=s.wk===wkN,wd=cur?s.wd||0:0,wt=totW(gi),exp=expectedNow();
+  const g0=R.joined?Math.min(gi,gOf(R.joined)):0,W=s.wkh||[];
+  const comp=(a,b)=>{if(!v2)return null;let d=0,t=0;for(let g=Math.max(a,g0);g<=b;g++){const x=W[g],dn=x?x[0]:0;if(g<gi){d+=Math.min(dn,totW(g));t+=totW(g)}else{d+=dn;t+=Math.max(exp,dn)}}return t?d/t:null};
+  const lbOf=g=>W[g]?W[g][1]:0;
+  const lift4=v2?[gi-3,gi-2,gi-1,gi].filter(g=>g>=0).map(lbOf):[];
+  const bwh=s.bwh||[],bwNow=bwh.length?bwh[bwh.length-1][1]:+s.bw||0,bwStart=+s.sw||(bwh.length?bwh[0][1]:0);
+  const ds=dsince(s.last);const flags=[];
+  if(ds==null){if(dsince(R.joined)>3)flags.push(["red","No lifts logged yet"])}else if(ds>=7)flags.push(["red","No lift in "+ds+" days"]);
+  if(wd<exp)flags.push(["amb",`${wd} of ${exp} lifts done so far this week`]);
+  if(cur&&(s.inj||[]).length)flags.push(["red","Injury: "+s.inj.join(", ")]);
+  const stl=[];(s.lifts||[]).filter(L=>L.m&&L.h.length>=4).forEach(L=>{const h=L.h,prev=h[h.length-4],l3=h.slice(-3);if(l3.every(x=>sameVar(x[2],prev[2]))&&Math.max(...l3.map(x=>x[1]))<=prev[1]&&dsince(h[h.length-1][3])<=21)stl.push(L.n.replace(/ \(.*\)$/,""))});
+  if(stl.length)flags.push(["amb","Stalled (no weight gain in 3 sessions): "+stl.slice(0,2).join(", ")+(stl.length>2?" +"+(stl.length-2)+" more":"")]);
+  if(!v2&&s.ph)flags.push(["gray","Detailed numbers show up after their next lift"]);
+  return{i,nm:cName(i),pos:R.pos||s.pos||"",u:R.u||"",s,v2,wd,wt,exp,c4:comp(gi-3,gi),cS:comp(0,gi),lbW:lbOf(gi),lb4:lift4.length?lift4.reduce((a,b)=>a+b,0)/lift4.length:0,ds,
+    prs:s.prs||0,prw:s.prw||0,bwNow,bwStart,bwCh:bwNow&&bwStart?Math.round((bwNow-bwStart)*10)/10:null,flags,att:flags.filter(f=>f[0]!=="gray").length}}
+function cPlayers(){return Object.keys(TEAM.roster).filter(i=>cRole(i)==="player").map(cDerive).filter(p=>cpos==="all"||p.pos===cpos)}
+function heatCell(d,t,fut){if(fut)return "f";if(d==null)return "n";if(!t)return "s";const r=d/t;return r>=.999?"g":r>0?"m":"z"}
+function coachHTML(){if(!["team","players","lifts","list","quotes"].includes(cview))cview="team";const T=findToday(),gi=gIdx(T.p,T.w),wkN=PH[T.p].weeks[T.w].n,ids=Object.keys(TEAM.roster),PL=cPlayers();
+  let h=topbar("Coach's view","Week "+wkN+" · "+weekRange(T.p,T.w),"more")+`<div class="body">`;
+  if(TEAM.demo)h+=`<div class="demobar">Sample team for preview. Turn it off on the test page.</div>`;
+  h+=`<div class="ctabs">${[["team","Team"],["players","Players"],["lifts","Lifts"],["list","Roster · "+ids.length],["quotes","Quotes"]].map(([k,l])=>`<button class="${cview===k?"on":""}" data-cv="${k}">${l}</button>`).join("")}</div>`;
+  if(["team","players","lifts"].includes(cview))h+=`<div class="cpos">${[["all","Everyone"],["Hitter","Hitters"],["Pitcher","Pitchers"]].map(([k,l])=>`<button class="${cpos===k?"on":""}" data-cpos="${k}">${l}</button>`).join("")}</div>`;
+  if(cview==="team")h+=cTeamHTML(PL,gi);
+  else if(cview==="players")h+=cPlayersHTML(PL);
+  else if(cview==="lifts")h+=cLiftsHTML(PL);
+  else if(cview==="quotes")h+=quoteHTML(true)+quoteListHTML();
+  else h+=cRosterHTML(ids);
+  return h+`</div>`}
+function cTeamHTML(PL,gi){if(!PL.length)return `<div class="gcard"><h2>No players yet</h2><p class="gp">Everyone who opens the app shows up here as a player. To preview this page with a team, load the sample team on the test page.</p></div>`;
+  const n=PL.length,lifted=PL.filter(p=>p.wd>0).length,c4s=PL.map(p=>p.c4).filter(x=>x!=null),c4=c4s.length?c4s.reduce((a,b)=>a+b,0)/c4s.length:null,prw=PL.reduce((a,p)=>a+p.prw,0);
+  const att=PL.filter(p=>p.att).sort((a,b)=>b.att-a.att||(b.ds||99)-(a.ds||99));
+  let h=`<div class="tiles"><div class="tl"><b>${lifted}<small>/${n}</small></b><span>Lifted this wk</span></div><div class="tl"><b>${pct(c4)}</b><span>4-wk done</span></div><div class="tl navy"><b>${prw}</b><span>PRs this wk</span></div><div class="tl ${att.length?"warn":""}"><b>${att.length}</b><span>Need a look</span></div></div>`;
+  const first=Math.max(0,gi-11),idx=[];for(let g=first;g<=gi;g++)idx.push(g);
+  const v2=PL.filter(p=>p.v2);
+  const rate=idx.map(g=>{let d=0,t=0;v2.forEach(p=>{const R=TEAM.roster[p.i]||{};if(R.joined&&gOf(R.joined)>g)return;const x=p.s.wkh[g],dn=x?x[0]:0;d+=dn;t+=g<gi?totW(g):Math.max(expectedNow(),dn)});return t?d/t*100:null});
+  const vol=idx.map(g=>{let s=0,c=0;v2.forEach(p=>{const x=p.s.wkh[g];if(x){s+=x[1];c++}});return c?s/Math.max(1,v2.length):null});
+  h+=`<div class="gcard"><div class="ghead"><h2>Lifts done</h2><span>% of scheduled · by week</span></div>${v2.length?barsSvg(rate,idx.map(g=>"W"+ALLW[g].n),idx.length-1,{max:100,fmt:v=>Math.round(v)+"%",label:"Team completion by week"}):`<p class="gp">Shows up once players open the updated app.</p>`}
+    <p class="gp">This week counts only the lifts that should be done by today.</p></div>`;
+  if(att.length)h+=`<div class="gcard"><div class="ghead"><h2>Needs a look</h2><span>${att.length} player${att.length>1?"s":""}</span></div>${att.map(p=>`<button class="arow" data-cpl="${esc(p.i)}"><span class="pav sm">${esc(initials(p.nm))}</span><span class="pnm"><b>${esc(p.nm)}</b>${p.flags.filter(f=>f[0]!=="gray").map(f=>`<small class="flag ${f[0]}">${esc(f[1])}</small>`).join("")}</span>${I.fwd}</button>`).join("")}</div>`;
+  const hw=idx.slice(-8);
+  h+=`<div class="gcard"><div class="ghead"><h2>Week by week</h2><span>last ${hw.length} weeks</span></div><div class="heat" style="--n:${hw.length}"><span></span>${hw.map(g=>`<b>${ALLW[g].n}</b>`).join("")}
+    ${PL.slice().sort((a,b)=>(b.c4||0)-(a.c4||0)||a.nm.localeCompare(b.nm)).map(p=>{const R=TEAM.roster[p.i]||{},g0=R.joined?gOf(R.joined):0;
+      return `<button class="hname" data-cpl="${esc(p.i)}">${esc(p.nm)}</button>${hw.map(g=>{const x=p.v2?p.s.wkh[g]:null,pre=g<g0,dn=x?x[0]:p.v2?0:null,t=g<gi?totW(g):Math.max(p.exp,dn||0);
+        return `<i class="${pre?"f":heatCell(dn,t,false)}" title="Week ${ALLW[g].n}: ${dn==null?"no data":dn+" of "+totW(g)}">${dn&&!pre?dn:""}</i>`}).join("")}`}).join("")}</div>
+    <div class="clegend2"><span><i class="g"></i>All done</span><span><i class="m"></i>Some</span><span><i class="z"></i>None</span><span><i class="n"></i>No data</span></div></div>`;
+  if(v2.length)h+=`<div class="gcard"><div class="ghead"><h2>Avg lb moved</h2><span>per player · by week</span></div>${barsSvg(vol,idx.map(g=>"W"+ALLW[g].n),idx.length-1,{fmt:v=>v>=1000?Math.round(v/100)/10+"k":Math.round(v),label:"Average pounds moved per player"})}</div>`;
+  const prs=[];PL.forEach(p=>(p.s.recent||[]).forEach(x=>prs.push(Object.assign({who:p.nm,i:p.i},x))));prs.sort((a,b)=>(b.iso||"").localeCompare(a.iso||""));
+  if(prs.length)h+=`<div class="gcard"><div class="ghead"><h2>Latest PRs</h2><span>whole team</span></div><div class="recs">${prs.slice(0,8).map(x=>`<button class="rec pr btnrow" data-cpl="${esc(x.i)}"><span class="prm">${prEmb()}</span><span><b>${esc(x.who)} · ${esc(x.n)}</b><small>${esc(x.d)}${x.p?` · up ${x.w-x.p} lb`:""}</small></span><em>${esc(x.w)}<small>lb</small></em></button>`).join("")}</div></div>`;
+  const mv=[];PL.forEach(p=>(p.s.lifts||[]).filter(L=>L.m).forEach(L=>{const g=liftGain(L);if(g&&g.pct>0)mv.push(Object.assign({who:p.nm,i:p.i,n:L.n},g))}));mv.sort((a,b)=>b.pct-a.pct);
+  if(mv.length)h+=`<div class="gcard"><div class="ghead"><h2>Biggest gains</h2><span>main lifts · first mark to best</span></div><div class="recs">${mv.slice(0,6).map(x=>`<button class="rec btnrow" data-cpl="${esc(x.i)}"><span><b>${esc(x.who)}</b><small>${esc(x.n)}${x.v?" · "+esc(x.v):""} · ${x.first} → ${x.best} lb</small></span><em>+${Math.round(x.pct)}<small>%</small></em></button>`).join("")}</div></div>`;
+  return h}
+function liftGain(L,v){const h=L.h.filter(x=>!v||x[2]===v);if(!h.length)return null;const vv=v||h[h.length-1][2],H=h.filter(x=>sameVar(x[2],vv));
+  const first=H[0][1],best=Math.max(...H.map(x=>x[1])),last=H[H.length-1];return{first,best,last:last[1],lastD:last[3],v:vv,diff:best-first,pct:first?((best-first)/first*100):0,cnt:H.length,vals:H.map(x=>x[1])}}
+function cPlayersHTML(PL){const S={att:["Needs a look",(a,b)=>b.att-a.att||(b.ds||99)-(a.ds||99)],name:["Name",(a,b)=>a.nm.localeCompare(b.nm)],wk:["This week",(a,b)=>b.wd-a.wd],c4:["4-wk %",(a,b)=>(b.c4||0)-(a.c4||0)],last:["Last lift",(a,b)=>(a.ds==null?999:a.ds)-(b.ds==null?999:b.ds)],prs:["PRs",(a,b)=>b.prs-a.prs],lb:["Volume",(a,b)=>b.lb4-a.lb4],bw:["Weight +/-",(a,b)=>(b.bwCh||-999)-(a.bwCh||-999)]};
+  const L=PL.slice().sort(S[csort]?S[csort][1]:S.att[1]);
+  let h=`<div class="csort"><span>Sort</span>${Object.keys(S).map(k=>`<button class="${csort===k?"on":""}" data-csort="${k}">${S[k][0]}</button>`).join("")}</div>`;
+  if(!L.length)return h+`<div class="gcard"><p class="gp">No players in this group yet.</p></div>`;
+  h+=`<div class="gcard flush">${L.map(p=>{const st=p.wd>=p.wt?"good":p.wd>=p.exp&&p.wd>0?"mid":p.wd>0?"mid":p.exp?"none":"";
+    return `<button class="prow2 ${st}" data-cpl="${esc(p.i)}"><span class="pav">${esc(initials(p.nm))}</span><span class="pnm"><b>${esc(p.nm)}${p.pos?` <em>${esc(p.pos)}</em>`:""}</b>
+      <small>${p.ds==null?"No lifts yet":p.ds===0?"Lifted today":"Last lift "+p.ds+"d ago"} · 4-wk ${pct(p.c4)} · ${p.prs} PR${p.prs===1?"":"s"}${p.lb4?" · "+Math.round(p.lb4/100)/10+"k lb/wk":""}${p.bwCh!=null?` · ${p.bwCh>0?"+":""}${p.bwCh} lb BW`:""}</small>
+      ${p.att?`<small class="flag ${p.flags[0][0]}">${esc(p.flags[0][1])}</small>`:""}</span>
+      <span class="pwk"><span class="pp2">${Array.from({length:p.wt},(_,k)=>`<i class="${k<p.wd?"on":k<p.exp?"due":""}"></i>`).join("")}</span><small>${p.wd}/${p.wt}</small></span></button>`}).join("")}</div>
+    <button class="hall" data-csv="1">${window.claude&&claude.use?"Copy the team table (for Sheets / Excel)":"Download the team table (CSV)"} ${I.fwd}</button>`;
+  return h}
+function cLiftsHTML(PL){const cnt={},nm={},main={};PL.forEach(p=>(p.s.lifts||[]).forEach(L=>{cnt[L.k]=(cnt[L.k]||0)+1;nm[L.k]=L.n;if(L.m)main[L.k]=1}));
+  const keys=Object.keys(cnt).sort((a,b)=>(main[b]||0)-(main[a]||0)||cnt[b]-cnt[a]||nm[a].localeCompare(nm[b]));
+  if(!keys.length)return `<div class="gcard"><h2>No lift numbers yet</h2><p class="gp">Leaderboards fill in as players log weights in the updated app.</p></div>`;
+  if(!cnt[clift])clift=keys[0];
+  let h=`<label class="lsel"><span>Lift</span><select data-clift="1">${keys.map(k=>`<option value="${esc(k)}" ${k===clift?"selected":""}>${esc(nm[k])}${main[k]?" ★":""} · ${cnt[k]} player${cnt[k]>1?"s":""}</option>`).join("")}</select></label>
+    <div class="seg s3"><button class="${cmet==="best"?"on":""}" data-cmet="best">Best lb</button><button class="${cmet==="rel"?"on":""}" data-cmet="rel">× BW</button><button class="${cmet==="gain"?"on":""}" data-cmet="gain">Gain</button></div>`;
+  const rows=[];PL.forEach(p=>{const L=(p.s.lifts||[]).find(x=>x.k===clift);if(!L)return;const vs=[...new Set(L.h.map(x=>x[2]))];
+    vs.forEach(v=>{const g=liftGain(L,v);if(!g)return;rows.push(Object.assign({p,rel:p.bwNow?g.best/p.bwNow:null},g))})});
+  const val=r=>cmet==="rel"?(r.rel||0):cmet==="gain"?r.pct:r.best;rows.sort((a,b)=>val(b)-val(a));
+  const bests=rows.map(r=>r.best),avg=bests.length?Math.round(bests.reduce((a,b)=>a+b,0)/bests.length):0;
+  h+=`<div class="tiles t3"><div class="tl"><b>${rows.length}</b><span>Logged it</span></div><div class="tl"><b>${avg||"—"}</b><span>Team avg best</span></div><div class="tl navy"><b>${rows.length?Math.max(...bests):"—"}</b><span>Team best</span></div></div>`;
+  h+=`<div class="gcard flush">${rows.map((r,k)=>`<button class="lbrow" data-cpl="${esc(r.p.i)}"><span class="rk ${k<3?"top":""}">${k+1}</span><span class="pnm"><b>${esc(r.p.nm)}${r.v?` <em>${esc(r.v)}</em>`:""}</b>
+      <small>first ${r.first} → best ${r.best}${r.diff>0?` (+${r.diff}, +${Math.round(r.pct)}%)`:""}${r.rel?` · ${r.rel.toFixed(2)}× BW`:""} · ${r.cnt} session${r.cnt>1?"s":""} · last ${r.lastD?nice(pd(r.lastD)):"—"}</small></span>
+      ${spark(r.vals.slice(-10),64,24)}<em class="lbv">${cmet==="rel"?(r.rel?r.rel.toFixed(2)+"×":"—"):cmet==="gain"?"+"+Math.round(r.pct)+"%":r.best}</em></button>`).join("")}</div>
+    <p class="gp lead">Barbell and dumbbell versions are ranked separately. × Bodyweight uses each player's latest weigh-in.</p>`;
+  return h}
+function cRosterHTML(ids){const role=cRole;
+  return `<div class="gcard flush">${ids.length?ids.sort((a,b)=>(TEAM.roster[a].joined||"").localeCompare(TEAM.roster[b].joined||"")||cName(a).localeCompare(cName(b))).map(i=>{const r=role(i),can=isCoach()&&r!=="head";
+    return `<div class="mlrow"><span class="pnm"><b>${esc(cName(i))}${ME&&i===ME.id?" (you)":""}</b><small>${TEAM.roster[i].u?"@"+esc(TEAM.roster[i].u)+" · ":""}${TEAM.roster[i].pos?esc(TEAM.roster[i].pos)+" · ":""}Signed up ${TEAM.roster[i].joined?nice(pd(TEAM.roster[i].joined)):"—"}</small></span>
+      ${r==="head"?`<span class="rtag">${SUPA_ON?"Coach":"Assistant coach"}</span>`:can?`<span class="rsw"><button class="${r==="player"?"on":""}" data-role="${esc(i)}|player">Player</button><button class="${r==="coach"?"on":""}" data-role="${esc(i)}|coach">Coach</button></span>`:`<span class="rtag">${r==="coach"?"Coach":"Player"}</span>`}</div>`}).join(""):`<p class="gp" style="padding:12px 16px">No one has signed up yet.</p>`}</div>
+   <p class="gp lead">Everyone starts as a player the first time they open the app. Every coach has the same abilities: this page, and switching anyone between player and coach.</p>`}
+function cPlayerHTML(){const T=findToday(),gi=gIdx(T.p,T.w);if(!CP||!TEAM.roster[CP]){view="coach";return coachHTML()}
+  const p=cDerive(CP),s=p.s;let h=topbar(p.nm,[p.pos,p.u?"@"+p.u:""].filter(Boolean).join(" · ")||"Player","coach")+`<div class="body">`;
+  if(!p.v2&&!s.ph)return h+`<div class="gcard"><h2>Nothing yet</h2><p class="gp">${esc(p.nm)} hasn't logged anything. Numbers show up here after their first lift.</p></div></div>`;
+  h+=`<div class="tiles"><div class="tl"><b>${p.wd}<small>/${p.wt}</small></b><span>This week</span></div><div class="tl"><b>${pct(p.c4)}</b><span>4-wk done</span></div><div class="tl"><b>${pct(p.cS)}</b><span>Season</span></div><div class="tl navy"><b>${p.prs}</b><span>PRs</span></div></div>`;
+  const fl=p.flags;if(fl.length)h+=`<div class="gcard">${fl.map(f=>`<p class="flag big ${f[0]}">${esc(f[1])}</p>`).join("")}</div>`;
+  const bwh=s.bwh||[];
+  h+=`<div class="gcard"><div class="ghead"><h2>Body</h2><span>${s.ht?esc(s.ht)+" tall":""}</span></div><div class="rgrid2"><div><b>${p.bwStart||"—"}</b><span>Start</span></div><div><b>${p.bwNow||"—"}</b><span>Now</span></div><div><b>${s.gw||"—"}</b><span>Goal</span></div><div><b>${p.bwCh!=null?(p.bwCh>0?"+":"")+p.bwCh:"—"}</b><span>Change</span></div></div>
+    ${bwh.length>1?plot(bwh.slice(-8).map(x=>x[1]),bwh.slice(-8).map(x=>md(pd(x[0]))),Math.min(7,bwh.length-1)," lb"):""}
+    ${s.nut?`<p class="gp">This month: <b>${s.nut.cal.toLocaleString()} cal</b> a day on average · protein <b>${s.nut.p} g</b> · carbs ${s.nut.c} g · fat ${s.nut.f} g · ${s.nut.n} days logged</p>`:`<p class="gp">No nutrition logged this month.</p>`}</div>`;
+  if(p.v2){const R=TEAM.roster[CP]||{},g0=R.joined?gOf(R.joined):0;
+    h+=`<div class="gcard"><div class="ghead"><h2>Season</h2><span>lifts done each week</span></div><div class="strip">${ALLW.map((x,g)=>{const w=s.wkh[g],dn=w?w[0]:0,fut=g>gi,pre=g<g0;
+      return `<i class="${fut||pre?"f":heatCell(dn,g<gi?totW(g):Math.max(p.exp,dn),false)} ${g===gi?"now":""}" title="Week ${x.n}${fut?"":": "+dn+" of "+totW(g)}"><b>${x.n}</b>${!fut&&!pre?dn:""}</i>`}).join("")}</div>
+      <div class="clegend2"><span><i class="g"></i>All done</span><span><i class="m"></i>Some</span><span><i class="z"></i>None</span><span><i class="f"></i>Not yet / before sign-up</span></div></div>`;
+    const idx=[];for(let g=Math.max(0,gi-9);g<=gi;g++)idx.push(g);
+    h+=`<div class="gcard"><div class="ghead"><h2>Pounds moved</h2><span>by week</span></div>${barsSvg(idx.map(g=>s.wkh[g]?s.wkh[g][1]:0),idx.map(g=>"W"+ALLW[g].n),idx.length-1,{fmt:v=>v>=1000?Math.round(v/100)/10+"k":Math.round(v),label:"Pounds moved by week"})}</div>`}
+  const lifts=(s.lifts||[]);
+  if(lifts.length)h+=`<div class="gcard"><div class="ghead"><h2>Lifts</h2><span>★ = main lift</span></div>${lifts.map(L=>{const vs=[...new Set(L.h.map(x=>x[2]))];return vs.map(v=>{const g=liftGain(L,v);if(!g)return "";
+      return `<div class="lfrow"><span class="pnm"><b>${L.m?"★ ":""}${esc(L.n)}${v?` <em>${esc(v)}</em>`:""}</b><small>${g.first} → best <strong>${g.best}</strong> · last ${g.last}${g.lastD?" ("+nice(pd(g.lastD))+")":""} · ${g.cnt}×</small></span>${spark(g.vals.slice(-10),70,26)}<em class="lbv ${g.diff>0?"up":""}">${g.diff>0?"+"+g.diff:"±0"}</em></div>`}).join("")}).join("")}</div>`;
+  const sess=s.sess||[];
+  if(sess.length)h+=`<div class="gcard"><div class="ghead"><h2>Recent workouts</h2><span>sets, options and notes</span></div>${sess.map((x,k)=>`<details class="hsess in" ${k===0?"open":""}><summary><span class="hdate"><b>${MON[pd(x.dt).getMonth()]}</b><i>${pd(x.dt).getDate()}</i></span><span class="hst"><b>${esc(x.dl)} · P${x.ph} Wk ${x.wk}</b><small>${x.inj?"Skipped for injury":x.sets+" sets · "+(x.lb?x.lb.toLocaleString()+" lb":"bodyweight")}</small></span></summary>
+      <div class="hbody">${x.ex.map(e=>`<div class="hx"><div class="hxh"><b>${esc(e[0])}</b>${e[1]?`<span class="hvar">${esc(e[1])}</span>`:""}</div>${e[4]?`<span class="hinj">Skipped · injury</span>`:""}${e[2]?`<p class="hline">${esc(e[2])}</p>`:""}${e[3]?`<p class="hnote">“${esc(e[3])}”</p>`:""}</div>`).join("")}</div></details>`).join("")}</div>`;
+  if((s.recent||[]).length)h+=`<div class="gcard"><div class="ghead"><h2>Latest PRs</h2></div>${s.recent.map(x=>`<div class="rec"><span><b>${esc(x.n)}</b><small>${esc(x.d)}${x.p?` · up ${x.w-x.p} lb`:""}</small></span><em>${esc(x.w)}<small>lb</small></em></div>`).join("")}</div>`;
+  return h+`</div>`}
+function teamCSV(){const PL=cPlayers(),q=v=>'"'+String(v==null?"":v).replace(/"/g,'""')+'"';
+  const head=["Player","Position","This week done","This week scheduled","4-week %","Season %","Days since last lift","PRs","PRs this week","Avg lb/week (4 wk)","Start BW","Current BW","BW change","Flags"];
+  const rows=PL.map(p=>[p.nm,p.pos,p.wd,p.wt,p.c4==null?"":Math.round(p.c4*100),p.cS==null?"":Math.round(p.cS*100),p.ds==null?"":p.ds,p.prs,p.prw,Math.round(p.lb4),p.bwStart||"",p.bwNow||"",p.bwCh==null?"":p.bwCh,p.flags.map(f=>f[1]).join("; ")]);
+  const csv=[head].concat(rows).map(r=>r.map(q).join(",")).join("\n");
+  if(window.claude&&claude.use){navigator.clipboard.writeText(csv).then(()=>toast("Team table copied · paste into Google Sheets or Excel"),()=>toast("Couldn't copy here"));return}
+  try{const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([csv],{type:"text/csv"}));a.download="cleary-lifting-team-"+todayISO()+".csv";document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},500);toast("Team table downloaded")}
+  catch(e){toast("Download isn't available here")}}
+
+/* ---- sample team for previewing the coach's view ---- */
+function demoTeam(on){TEAM.demo=on;if(!on){TEAM.roster={};TEAM.roles={};TEAM.sums={};TEAM.names={};if(DB)teamLoad();return}
+  const T=findToday(),gi=gIdx(T.p,T.w),wkN=PH[T.p].weeks[T.w].n,phN=PH[T.p].n;let seed=7;const rnd=()=>{seed=(seed*9301+49297)%233280;return seed/233280};
+  TEAM.roster={};TEAM.sums={};TEAM.names={};TEAM.roles={};
+  const ppl=[["Jake","Morrow","Hitter",.95,"2026-09-08"],["Luis","Ortega","Pitcher",.9,"2026-09-08"],["Tyler","Briggs","Hitter",.75,"2026-09-09"],["Evan","Kowalski","Pitcher",.7,"2026-09-10"],["Marcus","Hill","Hitter",.55,"2026-09-08"],["Drew","Pacheco","Pitcher",.4,"2026-09-14"],["Cole","Jensen","Hitter",.85,"2026-10-05"],["Nate","Sullivan","Pitcher",.2,"2026-11-09"]];
+  const LIFTS=[["frontsquat","Front Squat",1,185,""],["trapbardeadlift","Trap Bar Deadlift",1,275,""],["dborbarbellbenchpress","DB (or) Barbell Bench Press",1,165,"Barbell"],["barbellrdl","Barbell RDL",1,155,""],["sadbrow","SA DB Row",0,60,""],["1kneelsalandminepress","1/2 Kneel. SA Landmine Press",1,55,"Landmine"]];
+  ppl.forEach((x,n)=>{const id="demo-"+x[0]+x[1],g0=gOf(x[4]),rel=x[3];TEAM.roster[id]={joined:x[4],fn:x[0],ln:x[1],pos:x[2],u:(x[0][0]+x[1]).toLowerCase()};
+    const wkh=[];for(let g=0;g<=gi;g++){if(g<g0){wkh.push([0,0,0]);continue}const tot=g<gi?totW(g):expectedNow();let d=0;for(let k=0;k<tot;k++)if(rnd()<rel)d++;wkh.push([d,d*(4200+Math.round(rnd()*2600)),d*28])}
+    const done=wkh.slice(g0).reduce((a,w)=>a+w[0],0);
+    const lifts=LIFTS.map(([k,nm,m,base,v])=>{const h=[];let w0=base+Math.round((rnd()-.5)*40/5)*5;for(let g=Math.max(g0,gi-9);g<=gi;g++){if(!wkh[g][0])continue;if(n===4&&h.length>2){}else if(rnd()<.8)w0+=5*(1+Math.round(rnd()));h.push([ALLW[g].n,w0,v,iso(addD(pd(ALLW[g].mon),Math.floor(rnd()*4)))])}return{k,n:nm,m,h}}).filter(L=>L.h.length);
+    if(n===2&&lifts[2])lifts[2].h.forEach((q,j)=>{if(j>=lifts[2].h.length-2){q[2]="Dumbbell";q[1]=70}});
+    let last="";for(let g=gi;g>=0;g--)if(wkh[g][0]){last=iso(addD(pd(ALLW[g].mon),g===gi?Math.max(0,((new Date().getDay()+6)%7)-1-(n%3)):3));break}
+    if(n===5)last=iso(addD(new Date(),-9));
+    const bw=175+n*6,bwh=[];for(let k=0;k<8;k++)bwh.push([iso(addD(new Date(),-5*(7-k))),Math.round((bw+k*.6+(rnd()-.5)*2)*10)/10]);
+    const sess=last?[0,1,2].map(k=>({dt:iso(addD(pd(last),-k*2)),ph:phN,wk:k<2?wkN:wkN-1,dl:["Monday","Wednesday","Thursday"][2-k],sets:26+k,lb:7800+k*400,inj:0,
+      ex:[["A1 Front Squat","","WU 135 × 6, 185 × 8, 195 × 8, 205 × 6 (Paused), 205 × 6",k===0?"Felt strong, depth was good":"",0],["B1 Standing Ballistic Band Shoulder Ext/Int. Rotations","","x10 (Internal), x10 (External), x10 (Internal), x10 (External)","",0],["B2 DB (or) Barbell Bench Press",n===2?"Dumbbell":"Barbell",n===2?"65 × 8, 70 × 8, 70 × 8":"155 × 8, 165 × 8, 175 × 6 (Grinder)","",0]]})):[];
+    const recent=lifts.filter(L=>L.h.length>1).slice(0,3).map(L=>{const a=L.h[L.h.length-1],b=L.h[L.h.length-2];return{n:L.n+(L.h[0][2]?" · "+L.h[0][2]:""),w:a[1],p:b[1]<a[1]?b[1]:0,d:nice(pd(a[3])),iso:a[3]}}).filter(r=>r.p);
+    const cur=wkh[gi];TEAM.sums[id]={v:2,pos:x[2],ph:phN,wk:n===5?wkN-1:wkN,wd:cur[0],wt:totW(gi),sessions:done,prs:recent.length+Math.round(rel*6),prw:n<3?recent.length:0,tiers:[0,Math.round(rel*6),Math.round(rel*3),n<2?1:0],trophies:0,last,
+      inj:n===3?["Trap Bar Deadlift (Wed)"]:[],recent,wkh,lifts,sess,ht:["6'1\"","6'3\"","5'11\"","6'2\"","6'0\"","6'4\"","5'10\"","6'1\""][n],sw:String(bw),gw:String(bw+8),bw:String(bwh[7][1]),bwh,nut:n%2?null:{n:9+n,cal:2900+n*80,p:150+n*4,c:340,f:95}}});
+  TEAM.roster["demo-coach"]={joined:"2026-09-08",fn:"Sample",ln:"Coach"};TEAM.roles["demo-coach"]="coach"}
+
+/* ---- events for the new pieces ---- */
+document.addEventListener("click",e=>{
+  const vb=e.target.closest("[data-var]");if(vb){const a=vb.dataset.var.split("|"),r=rec(ph,wk,day),cv=curVariant(+a[0].split(".")[0],+a[0].split(".")[1]);
+    if(!cv.auto&&r.v[a[0]]===a[1])delete r.v[a[0]];else r.v[a[0]]=a[1];save(K(ph,wk,day));const y=scrollY;render();scrollTo(0,y);return}
+  const st=e.target.closest("[data-snt]");if(st){const i=st.dataset.snt.indexOf("|"),k=st.dataset.snt.slice(0,i),tag=st.dataset.snt.slice(i+1),r=rec(ph,wk,day),v=r.s[k]=r.s[k]||{};
+    let parts=(v.nt||"").split(/\s*,\s*/).filter(Boolean);const has=parts.some(p=>p.toLowerCase()===tag.toLowerCase());
+    const pair=[["External","Internal"],["Underhand","Overhand","Neutral"]].find(g=>g.includes(tag));
+    if(has)parts=parts.filter(p=>p.toLowerCase()!==tag.toLowerCase());else{if(pair)parts=parts.filter(p=>!pair.includes(p));parts.push(tag)}
+    if(parts.length)v.nt=parts.join(", ");else delete v.nt;if(!Object.keys(v).length)delete r.s[k];save(K(ph,wk,day));const y=scrollY;render();scrollTo(0,y);return}
+  const hv=e.target.closest("[data-hv]");if(hv){HV=hv.dataset.hv;render();return}
+  const hl=e.target.closest("[data-hl]");if(hl){HSEL=hl.dataset.hl;HVAR="";view="histlift";stn=null;render();scrollTo(0,0);return}
+  const hvr=e.target.closest("[data-hvar]");if(hvr){HVAR=hvr.dataset.hvar;render();return}
+  const cps=e.target.closest("[data-cpos]");if(cps){cpos=cps.dataset.cpos;const y=scrollY;render();scrollTo(0,y);return}
+  const cs=e.target.closest("[data-csort]");if(cs){csort=cs.dataset.csort;const y=scrollY;render();scrollTo(0,y);return}
+  const cm=e.target.closest("[data-cmet]");if(cm){cmet=cm.dataset.cmet;const y=scrollY;render();scrollTo(0,y);return}
+  const cpl=e.target.closest("[data-cpl]");if(cpl){CP=cpl.dataset.cpl;view="cplayer";render();scrollTo(0,0);return}
+  if(e.target.closest("[data-csv]")){teamCSV();return}});
+document.addEventListener("input",e=>{const t=e.target;if(!t.dataset)return;
+  if(t.dataset.sn){const r=rec(ph,wk,day),c=t.dataset.sn,v=r.s[c]=r.s[c]||{};const val=t.value.trim();if(val)v.nt=val;else delete v.nt;if(!Object.keys(v).length)delete r.s[c];save(K(ph,wk,day));return}
+  if(t.dataset.hq){const q=nrm(t.value);document.querySelectorAll(".hlrow").forEach(b=>{b.style.display=!q||b.dataset.name.replace(/\s/g,"").includes(q)?"":"none"});return}});
+document.addEventListener("change",e=>{const t=e.target;if(t.dataset&&t.dataset.clift){clift=t.value;const y=scrollY;render();scrollTo(0,y)}});
+document.addEventListener("keydown",e=>{if(e.key==="Enter"&&e.target.matches("input[data-sn],input[data-hq]")){e.preventDefault();e.target.blur()}});
+
 
 /* start on today's session */
 function saveView(){try{sessionStorage.setItem("lift2627",JSON.stringify({ph,wk,day}))}catch(e){}}
