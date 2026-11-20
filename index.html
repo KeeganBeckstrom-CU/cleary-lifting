@@ -1119,6 +1119,19 @@ body{font-family:var(--gb);color:var(--g-ink);padding:0!important;margin:0}
 .lfrow:first-of-type{border-top:0}.lfrow .pnm strong{color:var(--g-ink)}
 .btnrow{padding:9px 0;width:100%}.recs .btnrow:first-child{border-top:0}
 .strip i.s{background:transparent;box-shadow:inset 0 0 0 1.5px var(--g-line);color:var(--g-mute)}
+.xcard{margin-top:12px}.xadd{margin-top:14px}
+.xhd{display:flex;align-items:center;gap:10px;padding:12px 14px}.xhd b{flex:1;min-width:0;font:700 17px var(--gb);color:var(--g-ink)}.xhd span{font:600 13px var(--gb);color:var(--g-mute)}
+.xdel{border:1px solid var(--g-line);background:transparent;color:var(--g-mute);border-radius:8px;padding:5px 9px;font:600 12px var(--gb)}.xdel.arm{background:var(--g-red);border-color:var(--g-red);color:#fff}
+.xrow{display:flex;align-items:center;gap:10px;padding:9px 14px;border-top:1px solid var(--g-soft)}.xrow .xn{flex:1;font:700 14px var(--gb);color:var(--g-mute)}
+.xrow label{display:flex;align-items:center;gap:4px}.xrow small{font:600 12px var(--gb);color:var(--g-mute)}
+.xrow input,.xadd input{width:64px;height:40px;box-sizing:border-box;border:2px solid var(--g-line);border-radius:10px;background:var(--g-card);color:var(--g-ink);font:700 17px var(--gb);text-align:center}
+.xrow .cbx{background:none;padding:0}.xrow.on .cbx{background:var(--g-teal);border-color:var(--g-teal);color:#fff}
+.xsets{display:flex;gap:8px;padding:8px 14px 12px}.xsets button{flex:1;border:1px solid var(--g-line);background:transparent;color:var(--g-ink);border-radius:9px;padding:8px;font:600 13px var(--gb)}.xsets button[disabled]{opacity:.35}
+.xadd h3{margin:0 0 10px;font:italic 800 20px var(--gd);text-transform:uppercase;color:var(--g-ink)}
+.xadd #xn{width:100%;text-align:left;padding:0 12px;font-weight:600}
+.xaddrow{display:flex;align-items:flex-end;gap:10px;margin:10px 0 14px}.xaddrow label{display:flex;flex-direction:column;gap:3px;font:600 12px var(--gb);color:var(--g-mute)}
+.xwt{margin-left:auto;height:40px;border:2px solid var(--g-line);background:transparent;color:var(--g-mute);border-radius:10px;padding:0 12px;font:700 13px var(--gb)}.xwt.on{background:var(--g-teal);border-color:var(--g-teal);color:#fff}
+.xgo{width:calc(100% - 12px)!important;margin-left:4px!important;flex:none!important}
 </style>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,700;1,700;1,800&family=Barlow:wght@500;600;700&display=swap" rel="stylesheet">
 </head>
@@ -1159,7 +1172,7 @@ async function bootData(db,user,id){try{DB=db;UID=id;
   snap.docs.forEach(d=>{if(!d.exists)return;seen.add(d.id);const R=d.data()||{};
     if(d.id==="cfg"){if(!dirty.has("cfg"))Object.assign(CFG,R.cfg||{});return}
     if(!/^p\d+-w\d-d\d$/.test(d.id)&&!/^nut-\d{4}-\d{2}$/.test(d.id))return;
-    const Lc=LOG[d.id]||{},m={};["s","u","n","c","x","t","d","v"].forEach(f=>{m[f]=Object.assign({},R[f]||{});Object.keys(Lc[f]||{}).forEach(x=>m[f][x]=Lc[f][x])});LOG[d.id]=m;
+    const Lc=LOG[d.id]||{},m={};["s","u","n","c","x","t","d","v","e"].forEach(f=>{m[f]=Object.assign({},R[f]||{});Object.keys(Lc[f]||{}).forEach(x=>m[f][x]=Lc[f][x])});LOG[d.id]=m;
     if(JSON.stringify(m)!==JSON.stringify(R))dirty.add(d.id)});
   Object.keys(LOG).forEach(k=>{if(!seen.has(k))dirty.add(k)});
   local();if(!document.activeElement||!document.activeElement.matches("input,textarea"))render();if(dirty.size)flush();teamInit(db,user,id)}catch(e){}}
@@ -1464,7 +1477,7 @@ function render(){applyTheme();TALLY=null;celebrated.clear();const m=$("#main"),
   nav.style.display=view==="station"?"none":"";nav.innerHTML=navHTML();
   if(view==="today")m.innerHTML=todayHTML();
   else if(view==="lineup")m.innerHTML=lineupHTML();
-  else if(view==="station")m.innerHTML=stn==="wu"?warmHTML():stn==="soft"?softHTML():liftHTML();
+  else if(view==="station")m.innerHTML=stn==="wu"?warmHTML():stn==="soft"?softHTML():stn==="xtra"?xtraHTML():liftHTML();
   else if(view==="season")m.innerHTML=calendarHTML();
   else if(view==="trophies")m.innerHTML=trophiesHTML();
   else if(view==="more")m.innerHTML=moreHTML();
@@ -1516,6 +1529,9 @@ function lineupHTML(){const Q=P(),D=Q.days.find(x=>x.k===day),S=stops(),nd=S.fil
         <button class="skew white" data-stn="${s.k}">${s.started?"Keep going":"Start"}</button></div></div>`}
     else if(isCur)h+=`<div class="stop cur"><span class="sdot red">${s.letter}</span><div class="tile big"><div class="thead"><b>${esc(s.title)}</b><span>You're here</span></div><div class="exl"><span>${esc(s.sub)} · ${esc(s.part)}</span></div><button class="skew white" data-stn="${s.k}">${s.part.startsWith("0 ")?"Start":"Keep going"}</button></div></div>`;
     else h+=`<button class="stop ${s.done?"done":""}" data-stn="${s.k}"><span class="sdot ${s.done?"teal":"line"}">${s.done?I.check:s.letter}</span><span class="tile"><b>${s.k==="wu"?"Warm-up":s.letter+" · "+esc(s.title)}</b><small>${esc(s.done?s.part:s.sub)}</small></span></button>`});
+  {const XL=xtraList(),xd=XL.filter(([,x])=>xtraDone(x)).length;
+   h+=XL.length?`<button class="stop ${xd===XL.length?"done":""}" data-stn="xtra"><span class="sdot ${xd===XL.length?"teal":"line"}">${xd===XL.length?I.check:"+"}</span><span class="tile"><b>Extra lifts</b><small>${XL.map(([,x])=>esc(x.n)).join(" · ")} · ${xd} of ${XL.length} done</small></span></button>`:"";
+   h+=`<button class="stop sopt" data-stn="xtra"><span class="sdot ghost">✎</span><span class="tile"><b>Edit lift</b><small>Add extra lifts to ${esc(D.l)}</small></span></button>`}
   h+=all?`<button class="stop done" data-open="recap"><span class="sdot navy">${I.flag}</span><span class="tile"><b>Finish line</b><small>${injDay(ph,wk,day)?"Skipped for injury · nothing logged":"Workout complete · tap for the recap"}</small></span></button>`
         :`<div class="stop fin"><span class="sdot navy">${I.flag}</span><span class="tile dash"><b>Finish line</b><small>Confetti + your numbers</small></span></div>`;
   h+=nextBtn()+`<button class="resetday" data-injday="1">${injDay(ph,wk,day)?"Undo: I skipped this lift for injury":"Injured? Skip this whole lift"}</button><button class="resetday" data-reset="day">↺ Reset all of ${esc(D.l)}, Week ${Q.weeks[wk].n}</button></div>`;return h}
@@ -1525,6 +1541,41 @@ function warmHTML(){const Q=P(),r=rec(ph,wk,day),L=Q.warm[day]||[],n=Object.keys
   return topbar("Warm-up",n+" of "+L.length+" done","lineup")+`<div class="body"><div class="wtop"><p class="gp lead">Go down the list once. Tap each drill as you finish it.</p><button class="pillbtn" data-uall="${n>=L.length?0:1}">${n>=L.length?"Uncheck all":"Check all"}</button></div><div class="gcard flush">${L.map((x,i)=>`<div class="wrow2 ${r.u[i]?"on":""}" data-u="${i}"><span class="cbx">${I.check}</span><span class="wn"><b>${esc(x.n)}</b><small>${esc(WU_PLAIN[x.rx]||x.rx)}${x.sub?" · "+esc(x.sub):""}</small></span>${x.v?`<button class="vmini" data-vid="wu|${i}" aria-label="Watch ${esc(x.n)}">${I.play}</button>`:""}</div>`).join("")}</div>
    <button class="skew red" data-back="lineup">${n>=L.length?"Back to the lineup":"Done for now"}</button><button class="resetday" data-reset="wu">↺ Reset the warm-up</button></div>`}
 function softHTML(){const Q=P();return topbar("Soft tissue","On your own","lineup")+`<div class="body"><p class="gp lead">${esc(Q.softnote||"30-60 sec at each spot. You choose: take care of your body.")}</p><div class="gcard flush">${DATA.soft.map((s,i)=>`<div class="wrow2 plain"><span class="wn"><b>${esc(s.n)}</b></span>${s.v?`<button class="vmini" data-vid="soft|${i}" aria-label="Watch ${esc(s.n)}">${I.play}</button>`:""}</div>`).join("")}</div><button class="skew red" data-back="lineup">Back to the lineup</button></div>`}
+
+/* ---- EXTRA LIFTS (player-added) ---- */
+function xtraList(){const r=peek(ph,wk,day),E=(r&&r.e)||{};return Object.keys(E).filter(id=>!E[id].del).sort().map(id=>[id,E[id]])}
+function xtraDone(x){const S=x.s||{};let n=0;for(let i=0;i<x.sets;i++)if(S[i]&&S[i].d)n++;return n>=x.sets}
+function xtraHTML(){const r=rec(ph,wk,day),D=P().days.find(x=>x.k===day);r.e=r.e||{};const XL=xtraList();
+  let h=topbar("Edit lift","Extra lifts · "+D.l+" · Week "+P().weeks[wk].n,"lineup")+`<div class="body">`;
+  h+=`<p class="gp lead">Add any lift that isn't on the card. Extra lifts are saved with this workout and don't change your completion.</p>`;
+  XL.forEach(([id,x])=>{const S=x.s||{};
+    h+=`<div class="gcard flush xcard"><div class="xhd"><b>${esc(x.n)}</b><span>${x.sets} × ${esc(x.reps||"—")}</span><button class="xdel" data-xdel="${id}" aria-label="Remove ${esc(x.n)}">Remove</button></div>
+     ${Array.from({length:x.sets},(_,si)=>{const v=S[si]||{};return `<div class="xrow ${v.d?"on":""}"><span class="xn">Set ${si+1}</span>
+       ${x.wt?`<label><input inputmode="decimal" data-xw="${id}|${si}" value="${esc(v.w||"")}" placeholder="0"><small>lb</small></label>`:""}
+       <label><input inputmode="numeric" data-xr="${id}|${si}" value="${esc(v.r||"")}" placeholder="${esc(x.reps||"reps")}"><small>reps</small></label>
+       <button class="cbx" data-xd="${id}|${si}" aria-label="Set ${si+1} done">${I.check}</button></div>`}).join("")}
+     <div class="xsets"><button data-xsets="${id}|-1" ${x.sets<=1?"disabled":""}>− Set</button><button data-xsets="${id}|1">+ Set</button></div></div>`});
+  h+=`<div class="gcard xadd"><h3>Add a lift</h3>
+    <input id="xn" placeholder="Lift name (e.g. DB Curl)" maxlength="60">
+    <div class="xaddrow"><label>Sets<input id="xs" inputmode="numeric" value="3"></label><label>Reps<input id="xrp" value="10" maxlength="12"></label>
+     <button class="xwt on" id="xwt" data-xwt="1" aria-pressed="true">Uses weight</button></div>
+    <button class="skew red sm xgo" data-xadd="1">+ Add lift</button></div>`;
+  return h+`<button class="skew red" data-back="lineup">Back to the lineup</button></div>`}
+document.addEventListener("click",e=>{const t=e.target.closest("[data-xadd],[data-xdel],[data-xd],[data-xsets],[data-xwt]");if(!t)return;
+  const D=t.dataset,r=rec(ph,wk,day),k=K(ph,wk,day);r.e=r.e||{};const y=scrollY;
+  if(D.xwt){t.classList.toggle("on");t.setAttribute("aria-pressed",t.classList.contains("on"));t.textContent=t.classList.contains("on")?"Uses weight":"No weight";return}
+  if(D.xadd){const n=$("#xn").value.trim();if(!n){$("#xn").focus();toast("Name the lift first");return}
+    const sets=Math.max(1,Math.min(10,parseInt($("#xs").value)||3));
+    r.e["x"+Date.now().toString(36)]={n,sets,reps:$("#xrp").value.trim(),wt:$("#xwt").classList.contains("on")?1:0,s:{}};save(k);toast("Added "+n);render();scrollTo(0,y);return}
+  if(D.xdel){if(!t.classList.contains("arm")){t.classList.add("arm");t.textContent="Tap to confirm";setTimeout(()=>{t.classList.remove("arm");t.textContent="Remove"},3000);return}
+    const x=r.e[D.xdel];if(x){x.del=1;save(k)}render();scrollTo(0,y);return}
+  const[id,si]=(D.xd||D.xsets).split("|"),x=r.e[id];if(!x)return;
+  if(D.xd){x.s=x.s||{};const v=x.s[si]=x.s[si]||{};
+    const wi=document.querySelector(`[data-xw="${id}|${si}"]`),ri=document.querySelector(`[data-xr="${id}|${si}"]`);if(wi)v.w=wi.value.trim();if(ri)v.r=ri.value.trim();
+    v.d=v.d?0:1;if(v.d){v.t=todayISO();const b=t.getBoundingClientRect();flyAt(b.left+b.width/2,b.top,nextEmo())}save(k);render();scrollTo(0,y);return}
+  if(D.xsets){x.sets=Math.max(1,Math.min(10,x.sets+(+si)));save(k);render();scrollTo(0,y);return}});
+document.addEventListener("input",e=>{const t=e.target,c=t.dataset&&(t.dataset.xw||t.dataset.xr);if(!c)return;const[id,si]=c.split("|"),r=rec(ph,wk,day);r.e=r.e||{};const x=r.e[id];if(!x)return;
+  x.s=x.s||{};const v=x.s[si]=x.s[si]||{};v[t.dataset.xw?"w":"r"]=t.value.trim();save(K(ph,wk,day))});
 
 /* ---- ONE LIFT AT A TIME ---- */
 function liftHTML(){const bi=stn,Q=P(),b=Q.prog[day][bi],Lt=LET[bi],L=liveEx(bi);
