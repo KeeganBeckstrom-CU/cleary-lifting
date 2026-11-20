@@ -1312,6 +1312,14 @@ function blockSteps(b,bi){const Lt=LET[bi],out=[],lift=b.ex.map((e,i)=>({e,i,W:W
   out.push(esc(b.rest)+".");
   lift.filter(x=>isTimed(x.W)).forEach(x=>out.push(`⏱ ${Lt}${x.i+1} is <b>timed</b> — tap ▶ on each set to use the built-in timer.`));
   return out}
+function progXtraHTML(){const Q=P(),NW=Q.weeks.length,G={};
+  Q.weeks.forEach((_,w)=>Q.days.forEach(D=>xLogs(ph,w,D.k).forEach(L=>{const k=nrm(L.e.name),g=G[k]=G[k]||{n:L.e.name,wt:0,wk:Q.weeks.map(()=>({top:0,parts:[]}))};g.wk[w].top=Math.max(g.wk[w].top,L.top);if(L.top)g.wt=1;
+    g.wk[w].parts.push(L.sets.map(v=>(v.w||"BW")+(v.r?"×"+v.r:"")).join(" · "))})));
+  const K=Object.keys(G);if(!K.length)return "";
+  return `<div class="dayhead"><h2 style="font-size:22px">Extra lifts <small class="dsub2">added by you</small></h2></div>`+K.map(k=>{const g=G[k],tops=g.wk.map(x=>x.top),has=tops.filter(Boolean);
+    const bars=g.wt?(has.length?plot(tops,Q.weeks.map(W=>"Wk "+W.n),wk," lb"):""):"";
+    const lines=`<div class="pl">`+Q.weeks.map((W,w)=>`<div><b>Wk ${W.n}</b><span>${g.wk[w].parts.length?esc(g.wk[w].parts.join(" / ")):'<span class="empty">not logged</span>'}</span></div>`).join("")+`</div>`;
+    return `<section class="card"><div class="chead"><div class="letter">+</div><div class="t">${esc(g.n)}<small>${g.wt?"Top set (lb)":"Sets logged"}</small></div></div><div class="pbody">${bars}${lines}</div></section>`}).join("")}
 function progressHTML(){const Q=P();
   let improved=0,lifts=0;const S=phaseSessions(ph),NW=Q.weeks.length;
   const groups=Q.days.map(D=>{let out="";Q.prog[D.k].forEach((b,bi)=>b.ex.forEach((e,ei)=>{if(!e.weeks.some(W=>W&&W.wt))return;
@@ -1322,7 +1330,7 @@ function progressHTML(){const Q=P();
     let lines=`<div class="pl">`+Q.weeks.map((W,w)=>{const r=peek(ph,w,D.k),X=Wk(e,w),parts=[];rows(X).forEach((R,si)=>{const v=r&&r.s&&r.s[bi+"."+ei+"."+si];if(v&&v.d&&(v.w||v.r))parts.push((R.warm?"WU ":"")+(v.w||"BW")+(v.r?"×"+v.r:""))});
       return `<div><b>Wk ${W.n}</b><span>${parts.length?esc(parts.join(" · ")):'<span class="empty">not logged</span>'}</span></div>`}).join("")+`</div>`;
     out+=`<section class="card"><div class="chead"><div class="letter">${LET[bi]}${ei+1}</div><div class="t">${esc(e.name)}<small>Top working set (lb)</small></div></div><div class="pbody">${bars}${lines}</div></section>`}));
-    return out?`<div class="dayhead"><h2 style="font-size:22px">${esc(D.l)}${D.sub?` <small class="dsub2">${esc(D.sub)}</small>`:""}</h2></div>`+out:""}).join("");
+    return out?`<div class="dayhead"><h2 style="font-size:22px">${esc(D.l)}${D.sub?` <small class="dsub2">${esc(D.sub)}</small>`:""}</h2></div>`+out:""}).join("")+progXtraHTML();
   return `<div class="sumhead"><img src="${LOGO_BADGE}" alt=""><div><h2>Progress</h2><small>Phase ${Q.n} · ${esc(Q.name)} · Weeks ${Q.weeks[0].n}-${Q.weeks[NW-1].n}</small></div></div><div class="sum"><div><b>${S.done}/${S.tot}</b><span>sessions done</span></div><div><b>${improved}</b><span>lifts trending up</span></div><div><b>Wk ${Q.weeks[wk].n}</b><span>selected week</span></div></div>`+volumePlot()+(groups||`<section class="card"><div class="nc"><p>No weighted lifts logged in this phase yet.</p></div></section>`)+`<div class="foot">The red dot is the week you have selected. Open another phase from the Season calendar to see its charts.</div>`}
 
 function pcardHTML(p,st,forceLock){const Q=PH[p],S=phaseSessions(p),lk=forceLock===undefined?locked(p):forceLock;
@@ -2185,6 +2193,12 @@ function drawSettings(){const row=(f,on,t,d)=>`<button class="setsw ${on?"on":""
 
 /* ======================= v3: OPTION PICKER · SET NOTES · HISTORY · COACH ANALYTICS ======================= */
 const EXIDX={};PH.forEach((Q,p)=>Q.days.forEach((D,di)=>Q.prog[D.k].forEach((b,bi)=>b.ex.forEach((e,ei)=>{(EXIDX[nrm(e.name)]=EXIDX[nrm(e.name)]||[]).push({p,di,d:D.k,bi,ei,name:e.name,e})}))));
+/* extra (player-added) lifts, shaped like exLog() so History, Progress and the coach summary can use them */
+function xLogs(p,w,d){const r=peek(p,w,d),E=(r&&r.e)||{},di=PH[p].days.findIndex(D=>D.k===d),out=[];
+  Object.keys(E).sort().forEach(id=>{const x=E[id];if(x.del)return;const S=x.s||{},sets=[];let top=0,when="";
+    for(let si=0;si<x.sets;si++){const v=S[si];if(!v||!v.d)continue;sets.push({lab:"Set "+(si+1),warm:false,t:"x"+(x.reps||"1"),w:v.w||"",r:v.r||"",nt:"",d:true});if(+v.w>top)top=+v.w;if(v.t&&(!when||v.t<when))when=v.t}
+    if(sets.length)out.push({p,w,d,di,xid:id,tag:"Extra",e:{name:x.n},x,sets,note:"",inj:false,cnt:0,v:"",top,when})});return out}
+function xAll(){const out=[];PH.forEach((Q,p)=>Q.weeks.forEach((_,w)=>Q.days.forEach((D,di)=>{xLogs(p,w,D.k).forEach(L=>{L.o=ord(p,w,di);L.dt=sessDate(p,w,D.k);out.push(L)})})));return out.sort((a,b)=>b.o-a.o)}
 const ALLW=[];PH.forEach((Q,p)=>Q.weeks.forEach((W,w)=>ALLW.push({p,w,n:W.n,mon:W.mon})));
 const gIdx=(p,w)=>ALLW.findIndex(x=>x.p===p&&x.w===w);
 const gOf=s=>{const t=pd(s);let g=0;ALLW.forEach((x,i)=>{if(pd(x.mon)<=t)g=i});return g};
@@ -2235,21 +2249,23 @@ function setNoteHTML(k,e,v){const nt=v.nt||"",has=x=>nt.split(/\s*,\s*/).some(p=
    <input class="sni" data-sn="${k}" value="${esc(nt)}" placeholder="Type your own: internal, 3-sec pause, felt tight…" maxlength="80"></div>`}
 
 /* ---- reading back what was logged ---- */
-function sessDate(p,w,d){const r=peek(p,w,d);let when="";Object.values((r&&r.s)||{}).forEach(v=>{if(v.d&&v.t&&(!when||v.t<when))when=v.t});return when?pd(when):(dayDate(p,w,d)||pd(PH[p].weeks[w].mon))}
+function sessDate(p,w,d){const r=peek(p,w,d);let when="";Object.values((r&&r.s)||{}).forEach(v=>{if(v.d&&v.t&&(!when||v.t<when))when=v.t});Object.values((r&&r.e)||{}).forEach(x=>{if(!x.del)Object.values(x.s||{}).forEach(v=>{if(v.d&&v.t&&(!when||v.t<when))when=v.t})});return when?pd(when):(dayDate(p,w,d)||pd(PH[p].weeks[w].mon))}
 function sessionLite(p,w,d){const r=peek(p,w,d)||{s:{}};let sets=0,lb=0;PH[p].prog[d].forEach((b,bi)=>b.ex.forEach((e,ei)=>{const W=Wk(e,w);if(!W)return;rows(W).forEach((R,si)=>{const v=r.s&&r.s[bi+"."+ei+"."+si];if(!v||!v.d)return;sets++;
-  if(+v.w>0){const n=parseInt(v.r)||String(R.t).replace(/^x/,"").split(/[-,+ ]/).map(x=>parseInt(x)).filter(x=>x>0).slice(0,/,/.test(R.t)?9:1).reduce((a,x)=>a+x,0)||1;lb+=+v.w*(/sec/.test(R.t)?1:n)}})}));return{sets,lb}}
+  if(+v.w>0){const n=parseInt(v.r)||String(R.t).replace(/^x/,"").split(/[-,+ ]/).map(x=>parseInt(x)).filter(x=>x>0).slice(0,/,/.test(R.t)?9:1).reduce((a,x)=>a+x,0)||1;lb+=+v.w*(/sec/.test(R.t)?1:n)}})}));
+  xLogs(p,w,d).forEach(L=>L.sets.forEach(v=>{sets++;if(+v.w>0)lb+=+v.w*(parseInt(v.r)||parseInt(L.x.reps)||1)}));return{sets,lb}}
 function exLog(p,w,d,bi,ei){const r=peek(p,w,d),e=PH[p].prog[d][bi].ex[ei],W=Wk(e,w);if(!r||!W)return null;const sets=[];
   rows(W).forEach((R,si)=>{const v=r.s&&r.s[bi+"."+ei+"."+si];if(v&&(v.d||v.nt))sets.push({lab:R.lab,warm:!!R.warm,t:R.t,w:v.w||"",r:v.r||"",nt:v.nt||"",d:!!v.d})});
   const note=(r.n&&r.n[bi+"."+ei])||"",inj=!!(r.x&&(r.x.inj||r.x["i"+bi+"."+ei])),cnt=W.count&&r.c&&r.c[bi+"."+ei];
   if(!sets.some(s=>s.d)&&!note&&!inj&&!cnt)return null;
   return{p,w,d,bi,ei,e,W,sets,note,inj,cnt:cnt||0,v:varAt(p,w,d,bi,ei),top:topSet(p,w,d,bi,ei)}}
 function setTxt(s){const Pt=parseT(s.t),reps=s.r||(Pt.raw?"":Pt.big),lab=(Pt.big+(Pt.small&&!/each/.test(Pt.small)?" "+Pt.small:/each/.test(Pt.small)?" ea":"")).trim();return (s.warm?"WU ":"")+(+s.w>0?s.w+(reps?" × "+reps:""):(s.r||lab))+(s.d?"":" · not done")}
-function sessLogs(p,w,d){const out=[];PH[p].prog[d].forEach((b,bi)=>b.ex.forEach((e,ei)=>{const L=exLog(p,w,d,bi,ei);if(L)out.push(L)}));return out}
+function sessLogs(p,w,d){const out=[];PH[p].prog[d].forEach((b,bi)=>b.ex.forEach((e,ei)=>{const L=exLog(p,w,d,bi,ei);if(L)out.push(L)}));return out.concat(xLogs(p,w,d))}
 function allSessions(){const out=[];PH.forEach((Q,p)=>Q.weeks.forEach((W,w)=>Q.days.forEach((D,di)=>{const r=peek(p,w,D.k);if(!r)return;const S=sessionLite(p,w,D.k),inj=!!(r.x&&r.x.inj);if(!S.sets&&!inj)return;
   out.push(Object.assign({p,w,d:D.k,di,o:ord(p,w,di),dt:sessDate(p,w,D.k),inj},S))})));return out.sort((a,b)=>b.o-a.o)}
-function liftHist(key,skipCur){const out=[];(EXIDX[key]||[]).forEach(x=>PH[x.p].weeks.forEach((_,w)=>{if(skipCur&&x.p===ph&&w===wk&&x.d===day)return;const L=exLog(x.p,w,x.d,x.bi,x.ei);if(L){L.o=ord(x.p,w,x.di);L.dt=sessDate(x.p,w,x.d);out.push(L)}}));return out.sort((a,b)=>b.o-a.o)}
+function liftHist(key,skipCur){const out=[];(EXIDX[key]||[]).forEach(x=>PH[x.p].weeks.forEach((_,w)=>{if(skipCur&&x.p===ph&&w===wk&&x.d===day)return;const L=exLog(x.p,w,x.d,x.bi,x.ei);if(L){L.o=ord(x.p,w,x.di);L.dt=sessDate(x.p,w,x.d);out.push(L)}}));
+  xAll().forEach(L=>{if(nrm(L.e.name)!==key)return;if(skipCur&&L.p===ph&&L.w===wk&&L.d===day)return;out.push(L)});return out.sort((a,b)=>b.o-a.o)}
 function exLogHTML(L,o){o=o||{};const Q=PH[L.p];
-  const head=o.name?`<div class="hxh"><b>${esc(LET[L.bi]+(L.ei+1))} · ${esc(L.e.name)}</b>${L.v?`<span class="hvar">${esc(L.v)}</span>`:""}</div>`
+  const head=o.name?`<div class="hxh"><b>${esc(L.tag||LET[L.bi]+(L.ei+1))} · ${esc(L.e.name)}</b>${L.v?`<span class="hvar">${esc(L.v)}</span>`:""}</div>`
     :`<div class="hxh"><b>${nice(L.dt)}</b><small>Phase ${Q.n} · Wk ${Q.weeks[L.w].n} · ${esc(Q.days.find(D=>D.k===L.d).s)}</small>${L.v?`<span class="hvar">${esc(L.v)}</span>`:""}</div>`;
   const S=L.sets.filter(s=>s.d||s.nt);
   return `<div class="hx">${head}${L.inj?`<span class="hinj">Skipped · injury</span>`:""}${L.cnt?`<span class="hs"><b>${esc(L.cnt)} done</b></span>`:""}
@@ -2288,14 +2304,14 @@ function historyHTML(){const S=allSessions();
       h+=`<details class="hsess" ${i===0?"open":""}><summary><span class="hdate"><b>${MON[x.dt.getMonth()]}</b><i>${x.dt.getDate()}</i></span><span class="hst"><b>${esc(D.l)}${D.sub?` · ${esc(D.sub)}`:""}</b><small>${x.inj?"Skipped for injury":`${x.sets} sets · ${x.lb?Math.round(x.lb).toLocaleString()+" lb":"bodyweight"} · ${pc>=.999?"complete":Math.round((pc||0)*100)+"% done"}`}</small></span></summary>
         <div class="hbody">${L.map(z=>exLogHTML(z,{name:1})).join("")}<button class="hall" data-go="${x.p}|${x.w}|${x.d}">Open this workout ${I.fwd}</button></div></details>`});
   }else{
-    const keys=Object.keys(EXIDX).map(k=>({k,H:liftHist(k)})).filter(x=>x.H.length);
+    const keys=[...new Set(Object.keys(EXIDX).concat(xAll().map(L=>nrm(L.e.name))))].map(k=>({k,H:liftHist(k)})).filter(x=>x.H.length);
     keys.forEach(x=>{x.best=Math.max(0,...x.H.map(L=>L.top));x.last=x.H[0]});keys.sort((a,b)=>b.last.o-a.last.o);
     h+=`<input class="hq" data-hq="1" placeholder="Search a lift (squat, bench, row…)" autocomplete="off">`;
     if(!keys.length)h+=`<div class="gcard"><p class="gp">No lifts logged yet.</p></div>`;
     h+=`<div class="gcard flush">${keys.map(x=>{const L=x.last,tops=x.H.slice(0,10).reverse().map(z=>z.top);
       return `<button class="hlrow" data-hl="${esc(x.k)}" data-name="${esc(nrm(L.e.name)+" "+L.e.name.toLowerCase())}"><span class="hln"><b>${esc(L.e.name)}</b><small>${x.H.length} session${x.H.length>1?"s":""} · last ${nice(L.dt)}${x.best?` · best <strong>${x.best} lb</strong>`:""}</small></span>${spark(tops)}${I.fwd}</button>`}).join("")}</div>`}
   return h+`</div>`}
-function histLiftHTML(){const key=HSEL,E=EXIDX[key];if(!E)return historyHTML();const name=E[0].name,all=liftHist(key);
+function histLiftHTML(){const key=HSEL,E=EXIDX[key],all=liftHist(key);if(!E&&!all.length)return historyHTML();const name=E?E[0].name:all[0].e.name;
   const vs=[...new Set(all.map(L=>L.v).filter(Boolean))];if(HVAR&&!vs.includes(HVAR))HVAR="";
   const H=HVAR?all.filter(L=>L.v===HVAR):all,pts=H.filter(L=>L.top).slice(0,12).reverse();
   const best=Math.max(0,...H.map(L=>L.top)),first=pts.length?pts[0].top:0;
@@ -2327,12 +2343,13 @@ function mySummary(){const T=findToday(),R=weekRecap(T.p,T.w),t=tally(),gi=gIdx(
   Object.keys(LOG).forEach(k=>{if(!/^p\d+-w\d-d\d$/.test(k))return;Object.values(LOG[k].s||{}).forEach(v=>{if(v.d&&v.t&&v.t>last)last=v.t})});
   const M=CFG.me||{},E=prEvents(),mon=pd(ALLW[gi].mon),wkEnd=addD(mon,7);
   const wkh=ALLW.slice(0,gi+1).map(x=>{let d=0,sets=0,lb=0;PH[x.p].days.forEach(D=>{const pc=dayPct(x.p,x.w,D.k);if(pc==null)return;if(pc>=.999)d++;const S=sessionLite(x.p,x.w,D.k);sets+=S.sets;lb+=S.lb});return[d,Math.round(lb),sets]});
-  const lifts=[];Object.keys(NAMEIDX).forEach(key=>{const pts=[];NAMEIDX[key].forEach(x=>PH[x.p].weeks.forEach((W,w)=>{const tp=topSet(x.p,w,x.d,x.bi,x.ei);if(tp)pts.push([ord(x.p,w,x.di),W.n,tp,varAt(x.p,w,x.d,x.bi,x.ei),iso(sessDate(x.p,w,x.d))])}));
-    if(!pts.length)return;pts.sort((a,b)=>a[0]-b[0]);const main=NAMEIDX[key].some(x=>PH[x.p].prog[x.d][x.bi].ex[x.ei].weeks.some(W=>W&&(W.wu||W.main)));
-    lifts.push({k:key,n:NAMEIDX[key][0].name,m:main?1:0,h:pts.slice(-14).map(q=>[q[1],q[2],q[3],q[4]])})});
-  lifts.sort((a,b)=>b.m-a.m||b.h.length-a.h.length);lifts.splice(28);
+  const lifts=[],XA=xAll();[...new Set(Object.keys(NAMEIDX).concat(XA.map(L=>nrm(L.e.name))))].forEach(key=>{const pts=[];(NAMEIDX[key]||[]).forEach(x=>PH[x.p].weeks.forEach((W,w)=>{const tp=topSet(x.p,w,x.d,x.bi,x.ei);if(tp)pts.push([ord(x.p,w,x.di),W.n,tp,varAt(x.p,w,x.d,x.bi,x.ei),iso(sessDate(x.p,w,x.d))])}));
+    XA.forEach(L=>{if(L.top&&nrm(L.e.name)===key)pts.push([L.o,PH[L.p].weeks[L.w].n,L.top,"",iso(L.dt)])});
+    if(!pts.length)return;pts.sort((a,b)=>a[0]-b[0]);const main=(NAMEIDX[key]||[]).some(x=>PH[x.p].prog[x.d][x.bi].ex[x.ei].weeks.some(W=>W&&(W.wu||W.main)));
+    lifts.push({k:key,n:NAMEIDX[key]?NAMEIDX[key][0].name:XA.find(L=>nrm(L.e.name)===key).e.name,m:main?1:0,h:pts.slice(-14).map(q=>[q[1],q[2],q[3],q[4]])})});
+  lifts.sort((a,b)=>b.m-a.m||b.h.length-a.h.length);lifts.splice(40);
   const sess=allSessions().slice(0,8).map(S=>({dt:iso(S.dt),ph:PH[S.p].n,wk:PH[S.p].weeks[S.w].n,dl:PH[S.p].days.find(D=>D.k===S.d).l,sets:S.sets,lb:Math.round(S.lb),inj:S.inj?1:0,
-    ex:sessLogs(S.p,S.w,S.d).map(L=>[LET[L.bi]+(L.ei+1)+" "+L.e.name,L.v,L.sets.filter(s=>s.d||s.nt).map(s=>setTxt(s)+(s.nt?" ("+s.nt+")":"")).join(", ")+(L.cnt?L.cnt+" done":""),L.note,L.inj?1:0])}));
+    ex:sessLogs(S.p,S.w,S.d).map(L=>[(L.tag||LET[L.bi]+(L.ei+1))+" "+L.e.name,L.v,L.sets.filter(s=>s.d||s.nt).map(s=>setTxt(s)+(s.nt?" ("+s.nt+")":"")).join(", ")+(L.cnt?L.cnt+" done":""),L.note,L.inj?1:0])}));
   return{v:2,pos:M.pos||"",ht:M.ht||"",sw:M.sw||"",gw:M.gw||"",bw:CFG.bw||"",ph:PH[T.p].n,wk:PH[T.p].weeks[T.w].n,wd:R.done,wt:R.tot,sessions,prs:t.prs,tiers:t.tiers,trophies:t.trophies,last,inj:injList(T.p,T.w),
     prw:E.filter(x=>x.dt>=mon&&x.dt<wkEnd).length,recent:E.slice(0,6).map(x=>({n:x.name,w:x.w,p:x.prev,d:nice(x.dt),iso:iso(x.dt)})),
     wkh,lifts,sess,bwh:weighIns().slice(-14),nut:nutNow()}}
