@@ -1123,8 +1123,8 @@ body{font-family:var(--gb);color:var(--g-ink);padding:0!important;margin:0}
 .xhd{display:flex;align-items:center;gap:10px;padding:12px 14px}.xhd b{flex:1;min-width:0;font:700 17px var(--gb);color:var(--g-ink)}.xhd span{font:600 13px var(--gb);color:var(--g-mute)}
 .xdel{border:1px solid var(--g-line);background:transparent;color:var(--g-mute);border-radius:8px;padding:5px 9px;font:600 12px var(--gb)}.xdel.arm{background:var(--g-red);border-color:var(--g-red);color:#fff}
 .xrow{display:flex;align-items:center;gap:10px;padding:9px 14px;border-top:1px solid var(--g-soft)}.xrow .xn{flex:1;font:700 14px var(--gb);color:var(--g-mute)}
-.xrow label{display:flex;align-items:center;gap:4px}.xrow small{font:600 12px var(--gb);color:var(--g-mute)}
-.xrow input,.xadd input{width:64px;height:40px;box-sizing:border-box;border:2px solid var(--g-line);border-radius:10px;background:var(--g-card);color:var(--g-ink);font:700 17px var(--gb);text-align:center}
+.xrow label{display:flex;flex-direction:column;align-items:center;gap:1px}.xrow small{font:600 12px var(--gb);color:var(--g-mute)}
+.xrow input,.xadd input{width:58px;height:40px;box-sizing:border-box;border:2px solid var(--g-line);border-radius:10px;background:var(--g-card);color:var(--g-ink);font:700 17px var(--gb);text-align:center}
 .xrow .cbx{background:none;padding:0}.xrow.on .cbx{background:var(--g-teal);border-color:var(--g-teal);color:#fff}
 .xsets{display:flex;gap:8px;padding:8px 14px 12px}.xsets button{flex:1;border:1px solid var(--g-line);background:transparent;color:var(--g-ink);border-radius:9px;padding:8px;font:600 13px var(--gb)}.xsets button[disabled]{opacity:.35}
 .xadd h3{margin:0 0 10px;font:italic 800 20px var(--gd);text-transform:uppercase;color:var(--g-ink)}
@@ -1314,7 +1314,7 @@ function blockSteps(b,bi){const Lt=LET[bi],out=[],lift=b.ex.map((e,i)=>({e,i,W:W
   return out}
 function progXtraHTML(){const Q=P(),NW=Q.weeks.length,G={};
   Q.weeks.forEach((_,w)=>Q.days.forEach(D=>xLogs(ph,w,D.k).forEach(L=>{const k=nrm(L.e.name),g=G[k]=G[k]||{n:L.e.name,wt:0,wk:Q.weeks.map(()=>({top:0,parts:[]}))};g.wk[w].top=Math.max(g.wk[w].top,L.top);if(L.top)g.wt=1;
-    g.wk[w].parts.push(L.sets.map(v=>(v.w||"BW")+(v.r?"×"+v.r:"")).join(" · "))})));
+    g.wk[w].parts.push(L.sets.map(v=>v.txt).join(", "))})));
   const K=Object.keys(G);if(!K.length)return "";
   return `<div class="dayhead"><h2 style="font-size:22px">Extra lifts <small class="dsub2">added by you</small></h2></div>`+K.map(k=>{const g=G[k],tops=g.wk.map(x=>x.top),has=tops.filter(Boolean);
     const bars=g.wt?(has.length?plot(tops,Q.weeks.map(W=>"Wk "+W.n),wk," lb"):""):"";
@@ -1539,7 +1539,7 @@ function lineupHTML(){const Q=P(),D=Q.days.find(x=>x.k===day),S=stops(),nd=S.fil
     else h+=`<button class="stop ${s.done?"done":""}" data-stn="${s.k}"><span class="sdot ${s.done?"teal":"line"}">${s.done?I.check:s.letter}</span><span class="tile"><b>${s.k==="wu"?"Warm-up":s.letter+" · "+esc(s.title)}</b><small>${esc(s.done?s.part:s.sub)}</small></span></button>`});
   {const XL=xtraList(),xd=XL.filter(([,x])=>xtraDone(x)).length;
    h+=XL.length?`<button class="stop ${xd===XL.length?"done":""}" data-stn="xtra"><span class="sdot ${xd===XL.length?"teal":"line"}">${xd===XL.length?I.check:"+"}</span><span class="tile"><b>Extra lifts</b><small>${XL.map(([,x])=>esc(x.n)).join(" · ")} · ${xd} of ${XL.length} done</small></span></button>`:"";
-   h+=`<button class="stop sopt" data-stn="xtra"><span class="sdot ghost">✎</span><span class="tile"><b>Edit lift</b><small>Add extra lifts to ${esc(D.l)}</small></span></button>`}
+   h+=`<button class="stop sopt" data-stn="xtra"><span class="sdot ghost">✎</span><span class="tile"><b>Edit workout</b><small>Add extra lifts to ${esc(D.l)}</small></span></button>`}
   h+=all?`<button class="stop done" data-open="recap"><span class="sdot navy">${I.flag}</span><span class="tile"><b>Finish line</b><small>${injDay(ph,wk,day)?"Skipped for injury · nothing logged":"Workout complete · tap for the recap"}</small></span></button>`
         :`<div class="stop fin"><span class="sdot navy">${I.flag}</span><span class="tile dash"><b>Finish line</b><small>Confetti + your numbers</small></span></div>`;
   h+=nextBtn()+`<button class="resetday" data-injday="1">${injDay(ph,wk,day)?"Undo: I skipped this lift for injury":"Injured? Skip this whole lift"}</button><button class="resetday" data-reset="day">↺ Reset all of ${esc(D.l)}, Week ${Q.weeks[wk].n}</button></div>`;return h}
@@ -1554,18 +1554,19 @@ function softHTML(){const Q=P();return topbar("Soft tissue","On your own","lineu
 function xtraList(){const r=peek(ph,wk,day),E=(r&&r.e)||{};return Object.keys(E).filter(id=>!E[id].del).sort().map(id=>[id,E[id]])}
 function xtraDone(x){const S=x.s||{};let n=0;for(let i=0;i<x.sets;i++)if(S[i]&&S[i].d)n++;return n>=x.sets}
 function xtraHTML(){const r=rec(ph,wk,day),D=P().days.find(x=>x.k===day);r.e=r.e||{};const XL=xtraList();
-  let h=topbar("Edit lift","Extra lifts · "+D.l+" · Week "+P().weeks[wk].n,"lineup")+`<div class="body">`;
+  let h=topbar("Edit workout","Extra lifts · "+D.l+" · Week "+P().weeks[wk].n,"lineup")+`<div class="body">`;
   h+=`<p class="gp lead">Add any lift that isn't on the card. Extra lifts are saved with this workout and don't change your completion.</p>`;
   XL.forEach(([id,x])=>{const S=x.s||{};
-    h+=`<div class="gcard flush xcard"><div class="xhd"><b>${esc(x.n)}</b><span>${x.sets} × ${esc(x.reps||"—")}</span><button class="xdel" data-xdel="${id}" aria-label="Remove ${esc(x.n)}">Remove</button></div>
+    h+=`<div class="gcard flush xcard"><div class="xhd"><b>${esc(x.n)}</b><span>${x.sets} × ${esc(x.reps||"—")}${x.tm?" · "+esc(x.tm):""}</span><button class="xdel" data-xdel="${id}" aria-label="Remove ${esc(x.n)}">Remove</button></div>
      ${Array.from({length:x.sets},(_,si)=>{const v=S[si]||{};return `<div class="xrow ${v.d?"on":""}"><span class="xn">Set ${si+1}</span>
        ${x.wt?`<label><input inputmode="decimal" data-xw="${id}|${si}" value="${esc(v.w||"")}" placeholder="0"><small>lb</small></label>`:""}
-       <label><input inputmode="numeric" data-xr="${id}|${si}" value="${esc(v.r||"")}" placeholder="${esc(x.reps||"reps")}"><small>reps</small></label>
+       <label><input inputmode="numeric" data-xr="${id}|${si}" value="${esc(v.r||"")}" placeholder="${esc(x.reps||"—")}"><small>reps</small></label>
+       <label><input class="xtm" inputmode="text" data-xt="${id}|${si}" value="${esc(v.tm||"")}" placeholder="0:00"><small>time</small></label>
        <button class="cbx" data-xd="${id}|${si}" aria-label="Set ${si+1} done">${I.check}</button></div>`}).join("")}
      <div class="xsets"><button data-xsets="${id}|-1" ${x.sets<=1?"disabled":""}>− Set</button><button data-xsets="${id}|1">+ Set</button></div></div>`});
   h+=`<div class="gcard xadd"><h3>Add a lift</h3>
     <input id="xn" placeholder="Lift name (e.g. DB Curl)" maxlength="60">
-    <div class="xaddrow"><label>Sets<input id="xs" inputmode="numeric" value="3"></label><label>Reps<input id="xrp" value="10" maxlength="12"></label>
+    <div class="xaddrow"><label>Sets<input id="xs" inputmode="numeric" value="3"></label><label>Reps<input id="xrp" value="10" maxlength="12"></label><label>Time<input id="xtm" placeholder="0:00" maxlength="12"></label>
      <button class="xwt on" id="xwt" data-xwt="1" aria-pressed="true">Uses weight</button></div>
     <button class="skew red sm xgo" data-xadd="1">+ Add lift</button></div>`;
   return h+`<button class="skew red" data-back="lineup">Back to the lineup</button></div>`}
@@ -1574,16 +1575,16 @@ document.addEventListener("click",e=>{const t=e.target.closest("[data-xadd],[dat
   if(D.xwt){t.classList.toggle("on");t.setAttribute("aria-pressed",t.classList.contains("on"));t.textContent=t.classList.contains("on")?"Uses weight":"No weight";return}
   if(D.xadd){const n=$("#xn").value.trim();if(!n){$("#xn").focus();toast("Name the lift first");return}
     const sets=Math.max(1,Math.min(10,parseInt($("#xs").value)||3));
-    r.e["x"+Date.now().toString(36)]={n,sets,reps:$("#xrp").value.trim(),wt:$("#xwt").classList.contains("on")?1:0,s:{}};save(k);toast("Added "+n);render();scrollTo(0,y);return}
+    r.e["x"+Date.now().toString(36)]={n,sets,reps:$("#xrp").value.trim(),tm:$("#xtm").value.trim(),wt:$("#xwt").classList.contains("on")?1:0,s:{}};save(k);toast("Added "+n);render();scrollTo(0,y);return}
   if(D.xdel){if(!t.classList.contains("arm")){t.classList.add("arm");t.textContent="Tap to confirm";setTimeout(()=>{t.classList.remove("arm");t.textContent="Remove"},3000);return}
     const x=r.e[D.xdel];if(x){x.del=1;save(k)}render();scrollTo(0,y);return}
   const[id,si]=(D.xd||D.xsets).split("|"),x=r.e[id];if(!x)return;
   if(D.xd){x.s=x.s||{};const v=x.s[si]=x.s[si]||{};
-    const wi=document.querySelector(`[data-xw="${id}|${si}"]`),ri=document.querySelector(`[data-xr="${id}|${si}"]`);if(wi)v.w=wi.value.trim();if(ri)v.r=ri.value.trim();
+    const wi=document.querySelector(`[data-xw="${id}|${si}"]`),ri=document.querySelector(`[data-xr="${id}|${si}"]`);if(wi)v.w=wi.value.trim();if(ri)v.r=ri.value.trim();const ti=document.querySelector(`[data-xt="${id}|${si}"]`);if(ti)v.tm=ti.value.trim();
     v.d=v.d?0:1;if(v.d){v.t=todayISO();const b=t.getBoundingClientRect();flyAt(b.left+b.width/2,b.top,nextEmo())}save(k);render();scrollTo(0,y);return}
   if(D.xsets){x.sets=Math.max(1,Math.min(10,x.sets+(+si)));save(k);render();scrollTo(0,y);return}});
-document.addEventListener("input",e=>{const t=e.target,c=t.dataset&&(t.dataset.xw||t.dataset.xr);if(!c)return;const[id,si]=c.split("|"),r=rec(ph,wk,day);r.e=r.e||{};const x=r.e[id];if(!x)return;
-  x.s=x.s||{};const v=x.s[si]=x.s[si]||{};v[t.dataset.xw?"w":"r"]=t.value.trim();save(K(ph,wk,day))});
+document.addEventListener("input",e=>{const t=e.target,c=t.dataset&&(t.dataset.xw||t.dataset.xr||t.dataset.xt);if(!c)return;const[id,si]=c.split("|"),r=rec(ph,wk,day);r.e=r.e||{};const x=r.e[id];if(!x)return;
+  x.s=x.s||{};const v=x.s[si]=x.s[si]||{};v[t.dataset.xw?"w":t.dataset.xt?"tm":"r"]=t.value.trim();save(K(ph,wk,day))});
 
 /* ---- ONE LIFT AT A TIME ---- */
 function liftHTML(){const bi=stn,Q=P(),b=Q.prog[day][bi],Lt=LET[bi],L=liveEx(bi);
@@ -2196,7 +2197,8 @@ const EXIDX={};PH.forEach((Q,p)=>Q.days.forEach((D,di)=>Q.prog[D.k].forEach((b,b
 /* extra (player-added) lifts, shaped like exLog() so History, Progress and the coach summary can use them */
 function xLogs(p,w,d){const r=peek(p,w,d),E=(r&&r.e)||{},di=PH[p].days.findIndex(D=>D.k===d),out=[];
   Object.keys(E).sort().forEach(id=>{const x=E[id];if(x.del)return;const S=x.s||{},sets=[];let top=0,when="";
-    for(let si=0;si<x.sets;si++){const v=S[si];if(!v||!v.d)continue;sets.push({lab:"Set "+(si+1),warm:false,t:"x"+(x.reps||"1"),w:v.w||"",r:v.r||"",nt:"",d:true});if(+v.w>top)top=+v.w;if(v.t&&(!when||v.t<when))when=v.t}
+    for(let si=0;si<x.sets;si++){const v=S[si];if(!v||!v.d)continue;const base=+v.w>0?v.w+(v.r?" × "+v.r:""):v.r?v.r+" reps":"",txt=[base,v.tm].filter(Boolean).join(" · ")||"done";
+      sets.push({lab:"Set "+(si+1),warm:false,t:"x"+(x.reps||"1"),w:v.w||"",r:v.r||"",tm:v.tm||"",txt,nt:"",d:true});if(+v.w>top)top=+v.w;if(v.t&&(!when||v.t<when))when=v.t}
     if(sets.length)out.push({p,w,d,di,xid:id,tag:"Extra",e:{name:x.n},x,sets,note:"",inj:false,cnt:0,v:"",top,when})});return out}
 function xAll(){const out=[];PH.forEach((Q,p)=>Q.weeks.forEach((_,w)=>Q.days.forEach((D,di)=>{xLogs(p,w,D.k).forEach(L=>{L.o=ord(p,w,di);L.dt=sessDate(p,w,D.k);out.push(L)})})));return out.sort((a,b)=>b.o-a.o)}
 const ALLW=[];PH.forEach((Q,p)=>Q.weeks.forEach((W,w)=>ALLW.push({p,w,n:W.n,mon:W.mon})));
@@ -2258,7 +2260,7 @@ function exLog(p,w,d,bi,ei){const r=peek(p,w,d),e=PH[p].prog[d][bi].ex[ei],W=Wk(
   const note=(r.n&&r.n[bi+"."+ei])||"",inj=!!(r.x&&(r.x.inj||r.x["i"+bi+"."+ei])),cnt=W.count&&r.c&&r.c[bi+"."+ei];
   if(!sets.some(s=>s.d)&&!note&&!inj&&!cnt)return null;
   return{p,w,d,bi,ei,e,W,sets,note,inj,cnt:cnt||0,v:varAt(p,w,d,bi,ei),top:topSet(p,w,d,bi,ei)}}
-function setTxt(s){const Pt=parseT(s.t),reps=s.r||(Pt.raw?"":Pt.big),lab=(Pt.big+(Pt.small&&!/each/.test(Pt.small)?" "+Pt.small:/each/.test(Pt.small)?" ea":"")).trim();return (s.warm?"WU ":"")+(+s.w>0?s.w+(reps?" × "+reps:""):(s.r||lab))+(s.d?"":" · not done")}
+function setTxt(s){if(s.txt)return s.txt;const Pt=parseT(s.t),reps=s.r||(Pt.raw?"":Pt.big),lab=(Pt.big+(Pt.small&&!/each/.test(Pt.small)?" "+Pt.small:/each/.test(Pt.small)?" ea":"")).trim();return (s.warm?"WU ":"")+(+s.w>0?s.w+(reps?" × "+reps:""):(s.r||lab))+(s.d?"":" · not done")}
 function sessLogs(p,w,d){const out=[];PH[p].prog[d].forEach((b,bi)=>b.ex.forEach((e,ei)=>{const L=exLog(p,w,d,bi,ei);if(L)out.push(L)}));return out.concat(xLogs(p,w,d))}
 function allSessions(){const out=[];PH.forEach((Q,p)=>Q.weeks.forEach((W,w)=>Q.days.forEach((D,di)=>{const r=peek(p,w,D.k);if(!r)return;const S=sessionLite(p,w,D.k),inj=!!(r.x&&r.x.inj);if(!S.sets&&!inj)return;
   out.push(Object.assign({p,w,d:D.k,di,o:ord(p,w,di),dt:sessDate(p,w,D.k),inj},S))})));return out.sort((a,b)=>b.o-a.o)}
